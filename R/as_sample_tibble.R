@@ -5,6 +5,8 @@
 
 
 #' @importFrom tidybayes as_sample_tibble
+#' @importFrom MASS mvrnorm
+#' @importFrom stats coef vcov
 #' @export
 as_sample_tibble.map = function(model) {
   mu = coef(model)

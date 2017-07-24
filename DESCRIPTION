@@ -10,37 +10,20 @@ Description: Extends tidybayes to support composing data for and gathering sampl
 Depends:
     R (>= 2.10)
 Imports:
-    lazyeval,
-    plyr,
     dplyr,
-    tidyr,
-    ggplot2,
-    stringi,
-    LaplacesDemon,
-    coda,
-    purrr,
-    tibble,
     MASS,
-    rlang,
+    tidybayes,
+    rethinking,
+    rstan
+Suggests:
+    ggplot2,
     ggstance,
     magrittr,
-    tidybayes
-Suggests:
+    tidyr,
     knitr,
     import,
     testthat,
-    rstan,
-    runjags,
-    rstanarm,
-    rstantools,
-    lsmeans,
-    broom,
-    forcats,
-    dotwhisker,
-    MCMCglmm,
-    brms
-Enhances:
-    rethinking
+    dotwhisker
 Remotes: 
     rmcelreath/rethinking,
     mjskay/tidybayes
