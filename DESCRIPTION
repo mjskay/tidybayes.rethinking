@@ -1,6 +1,6 @@
 Package: tidybayes.rethinking
 Title: Tidy Data for Rethinking
-Version: 0.10.0.000001
+Version: 0.11.0.000001
 Date: 2017-07-23
 Authors@R: c(person("Matthew", "Kay", role = c("aut", "cre"),
     email = "mjskay@umich.edu"))
@@ -12,7 +12,7 @@ Depends:
 Imports:
     dplyr,
     MASS,
-    tidybayes,
+    tidybayes (>= 0.11),
     rethinking,
     rstan
 Suggests:
