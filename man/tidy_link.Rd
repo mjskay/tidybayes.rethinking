@@ -17,7 +17,7 @@ Computes samples for all link functions in \code{fit} and returns a tidy-format 
 consisting of multiple samples for each row of \code{data}.}
 }
 \description{
-Computes inverse-link linear model samples for \code{\link[rethinking]{map}} and 
+Computes inverse-link linear model samples for \code{\link[rethinking]{map}} and
 \code{\link[rethinking]{map2stan}} models in a tidy data format (a tidy version of
 \code{\link[rethinking]{link}}).
 }

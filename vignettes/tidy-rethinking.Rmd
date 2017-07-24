@@ -1,0 +1,99 @@
+---
+title: "Extracting tidy samples from rethinking models"
+author: "Matthew Kay"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    df_print: kable
+vignette: >
+  %\VignetteIndexEntry{Extracting tidy data from rstanarm}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+<style type="text/css">
+.kable-table table {
+  margin-left: 0;
+}
+</style>
+
+
+## Introduction
+  
+This vignette describes how to use the `tidybayes` package to extract tidy samples from `rethinking`. For a more general introduction to `tidybayes` and its use on more general-purpose sampling languages (like Stan and JAGS), see `vignette("tidybayes")`.
+  
+The default output data formats of popular samplers like JAGS and Stan often don't quite conform to the ideal of [tidy data](http://dx.doi.org/10.18637/jss.v059.i10). Output formats will often be in matrix form (requiring conversion for use with libraries like ggplot). `tidybayes` automates munging the samples into tidy formats.
+  
+  
+## Setup
+  
+The following libraries are required to run this vignette:
+  
+```{r setup, message = FALSE, warning = FALSE}
+library(magrittr)
+library(dplyr)
+library(tidybayes)
+library(tidybayes.rethinking)
+library(ggplot2)
+library(ggstance)
+library(rstan)
+library(rethinking)
+```
+
+These options help Stan run faster:
+
+```{r, eval=FALSE}
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+```
+
+```{r hidden_options, include=FALSE}
+# While the previous code chunk is the actual recommended approach,
+# CRAN vignette building policy limits us to 2 cores, so we use at most
+# 2 to build this vignette (but show the previous chunk to
+# the reader as a best pratice example)
+rstan_options(auto_write = TRUE)
+options(mc.cores = min(2, parallel::detectCores()))
+
+#ggplot options
+theme_set(theme_light())
+
+#figure options
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
+```
+
+
+## Example dataset
+
+To demonstrate `tidybayes`, we will use a simple dataset with 10 observations from 5 conditions each:
+
+```{r}
+set.seed(5)
+n = 10
+n_condition = 5
+ABC =
+  data_frame(
+    condition = rep(c("A","B","C","D","E"), n),
+    response = rnorm(n * 5, c(0,1,2,1,-1), 0.5)
+  )
+```
+
+A snapshot of the data looks like this:
+
+```{r}
+head(ABC, 10)
+```
+*(10 rows of `r nrow(ABC)`)*
+
+This is a typical tidy format data frame: one observation per row. Graphically:
+
+```{r}
+ABC %>%
+  ggplot(aes(y = condition, x = response)) +
+  geom_point()
+```
+
+## Model
+
+TBD.

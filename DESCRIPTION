@@ -1,15 +1,12 @@
-Package: tidybayes
-Title: Tidy Data for MCMC/Bayesian Samplers
+Package: tidybayes.rethinking
+Title: Tidy Data for Rethinking
 Version: 0.10.0.000001
-Date: 2017-07-07
+Date: 2017-07-23
 Authors@R: c(person("Matthew", "Kay", role = c("aut", "cre"),
     email = "mjskay@umich.edu"))
 Maintainer: Matthew Kay <mjskay@umich.edu>
-Description: Facilitates composing data for and gathering samples from
-    Bayesian samplers (JAGS, Stan, ...) in a tidy data format. Also provides
-    miscellaneous functions helpful for analysing tidy samples from Bayesian models, such 
-    as estimates and intervals, and a ggplot2 function for easy eye plots of posteriors
-    (aka raindrop plots or violin plots).
+Description: Extends tidybayes to support composing data for and gathering samples from
+    models fit using Richard McElreath's rethinking package in a tidy data format.
 Depends:
     R (>= 2.10)
 Imports:
@@ -26,7 +23,8 @@ Imports:
     MASS,
     rlang,
     ggstance,
-    magrittr
+    magrittr,
+    tidybayes
 Suggests:
     knitr,
     import,
@@ -43,9 +41,11 @@ Suggests:
     brms
 Enhances:
     rethinking
-Remotes: rmcelreath/rethinking
+Remotes: 
+    rmcelreath/rethinking,
+    mjskay/tidybayes
 License: GPL (>= 3)
-BugReports: https://github.com/mjskay/tidybayes/issues/new
-URL: https://github.com/mjskay/tidybayes
+BugReports: https://github.com/mjskay/tidybayes.rethinking/issues/new
+URL: https://github.com/mjskay/tidybayes.rethinking
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
