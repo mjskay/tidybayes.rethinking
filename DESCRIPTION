@@ -1,7 +1,7 @@
 Package: tidybayes.rethinking
 Title: Tidy Data for Rethinking
-Version: 0.11.0.000001
-Date: 2017-07-23
+Version: 0.12.0.9000
+Date: 2019-03-03
 Authors@R: c(person("Matthew", "Kay", role = c("aut", "cre"),
     email = "mjskay@umich.edu"))
 Maintainer: Matthew Kay <mjskay@umich.edu>
@@ -12,7 +12,7 @@ Depends:
 Imports:
     dplyr,
     MASS,
-    tidybayes (>= 0.11),
+    tidybayes (>= 1.0),
     rethinking,
     rstan
 Suggests:
@@ -31,4 +31,4 @@ License: GPL (>= 3)
 BugReports: https://github.com/mjskay/tidybayes.rethinking/issues/new
 URL: https://github.com/mjskay/tidybayes.rethinking
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

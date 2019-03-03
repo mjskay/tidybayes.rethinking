@@ -1,14 +1,14 @@
-# as_sample_tibble
+# tidy_draws
 #
 # Author: mjskay
 ###############################################################################
 
 
-#' @importFrom tidybayes as_sample_tibble
+#' @importFrom tidybayes tidy_draws
 #' @importFrom MASS mvrnorm
 #' @importFrom stats coef vcov
 #' @export
-as_sample_tibble.map = function(model) {
+tidy_draws.map = function(model) {
   mu = coef(model)
   samples = as_tibble(mvrnorm(n = 10000, mu = mu, Sigma = vcov(model)))
   #map models have no chains
@@ -16,6 +16,6 @@ as_sample_tibble.map = function(model) {
 }
 
 #' @export
-as_sample_tibble.map2stan = function(model) {
-  as_sample_tibble(model@stanfit)
+tidy_draws.map2stan = function(model) {
+  tidy_draws(model@stanfit)
 }
