@@ -23,8 +23,8 @@ check_for_rethinking = function(name) {
 #' @param fit Object of class \code{\link[rethinking]{map}} or \code{\link[rethinking]{map2stan}}.
 #' @param ... Additional arguments for \code{\link[rethinking]{link}}.
 #'
-#' Computes samples for all link functions in \code{fit} and returns a tidy-format data frame
-#' consisting of multiple samples for each row of \code{data}.
+#' Computes samples for all link functions in `fit` and returns a tidy-format data frame
+#' consisting of multiple samples for each row of `data`.
 #'
 #' @seealso \code{\link[rethinking]{link}}
 #'
@@ -48,13 +48,13 @@ tidy_link = function(data, fit, ...) {
 #'
 #' @param data Optional list of data to compute predictions over. When missing, uses data found inside fit object.
 #' @param fit Object of class \code{\link[rethinking]{map}} or \code{\link[rethinking]{map2stan}}.
-#' @param name If \code{NULL}, uses the name of the first response specification in the model with ".predicted"
+#' @param name If `NULL`, uses the name of the first response specification in the model with ".predicted"
 #' appended as the column representing predictions. Otherwise, gives a bare (unquoted) name to assign
 #' predicted observations to.
 #' @param ... Additional arguments for \code{\link[rethinking]{sim}}.
 #'
-#' Simulates posterior observations for all link functions in \code{fit} and returns a tidy-format data frame
-#' consisting of multiple samples for each row of \code{data}.
+#' Simulates posterior observations for all link functions in `fit` and returns a tidy-format data frame
+#' consisting of multiple samples for each row of `data`.
 #'
 #' @seealso \code{\link[rethinking]{sim}}
 #'
