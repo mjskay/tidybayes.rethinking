@@ -9,18 +9,18 @@ tidy_link(data, fit, ...)
 \arguments{
 \item{data}{Optional list of data to compute predictions over. When missing, uses data found inside fit object.}
 
-\item{fit}{Object of class \code{\link[rethinking]{map}} or \code{\link[rethinking]{map2stan}}.}
+\item{fit}{Object of class \code{\link[rethinking:map]{rethinking::map()}} or \code{\link[rethinking:map2stan]{rethinking::map2stan()}}.}
 
-\item{...}{Additional arguments for \code{\link[rethinking]{link}}.
+\item{...}{Additional arguments for \code{\link[rethinking:link]{rethinking::link()}}.
 
 Computes samples for all link functions in \code{fit} and returns a tidy-format data frame
 consisting of multiple samples for each row of \code{data}.}
 }
 \description{
-Computes inverse-link linear model samples for \code{\link[rethinking]{map}} and
-\code{\link[rethinking]{map2stan}} models in a tidy data format (a tidy version of
-\code{\link[rethinking]{link}}).
+Computes inverse-link linear model samples for \code{\link[rethinking:map]{rethinking::map()}} and
+\code{\link[rethinking:map2stan]{rethinking::map2stan()}} models in a tidy data format (a tidy version of
+\code{\link[rethinking:link]{rethinking::link()}}).
 }
 \seealso{
-\code{\link[rethinking]{link}}
+\code{\link[rethinking:link]{rethinking::link()}}
 }

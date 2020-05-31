@@ -15,18 +15,18 @@ check_for_rethinking = function(name) {
 
 #' Tidy predictions for map and map2stan models
 #'
-#' Computes inverse-link linear model samples for \code{\link[rethinking]{map}} and
-#' \code{\link[rethinking]{map2stan}} models in a tidy data format (a tidy version of
-#' \code{\link[rethinking]{link}}).
+#' Computes inverse-link linear model samples for [rethinking::map()] and
+#' [rethinking::map2stan()] models in a tidy data format (a tidy version of
+#' [rethinking::link()]).
 #'
 #' @param data Optional list of data to compute predictions over. When missing, uses data found inside fit object.
-#' @param fit Object of class \code{\link[rethinking]{map}} or \code{\link[rethinking]{map2stan}}.
-#' @param ... Additional arguments for \code{\link[rethinking]{link}}.
+#' @param fit Object of class [rethinking::map()] or [rethinking::map2stan()].
+#' @param ... Additional arguments for [rethinking::link()].
 #'
 #' Computes samples for all link functions in `fit` and returns a tidy-format data frame
 #' consisting of multiple samples for each row of `data`.
 #'
-#' @seealso \code{\link[rethinking]{link}}
+#' @seealso [rethinking::link()]
 #'
 #' @export
 tidy_link = function(data, fit, ...) {
@@ -43,20 +43,20 @@ tidy_link = function(data, fit, ...) {
 
 #' Tidy posterior observations for map and map2stan models
 #'
-#' Simulates posterior observations for \code{\link[rethinking]{map}} and \code{\link[rethinking]{map2stan}} models
-#' in a tidy data format (a tidy version of \code{\link[rethinking]{sim}}).
+#' Simulates posterior observations for [rethinking::map()] and [rethinking::map2stan()] models
+#' in a tidy data format (a tidy version of [rethinking::sim()]).
 #'
 #' @param data Optional list of data to compute predictions over. When missing, uses data found inside fit object.
-#' @param fit Object of class \code{\link[rethinking]{map}} or \code{\link[rethinking]{map2stan}}.
+#' @param fit Object of class [rethinking::map()] or [rethinking::map2stan()].
 #' @param name If `NULL`, uses the name of the first response specification in the model with ".predicted"
 #' appended as the column representing predictions. Otherwise, gives a bare (unquoted) name to assign
 #' predicted observations to.
-#' @param ... Additional arguments for \code{\link[rethinking]{sim}}.
+#' @param ... Additional arguments for [rethinking::sim()].
 #'
 #' Simulates posterior observations for all link functions in `fit` and returns a tidy-format data frame
 #' consisting of multiple samples for each row of `data`.
 #'
-#' @seealso \code{\link[rethinking]{sim}}
+#' @seealso [rethinking::sim()]
 #'
 #' @export
 tidy_sim = function(data, fit, name = NULL, ...) {
