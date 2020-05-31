@@ -1,11 +1,11 @@
 Package: tidybayes.rethinking
 Title: Tidy Data for Rethinking
-Version: 0.12.0.9000
-Date: 2019-03-03
+Version: 1.99.0.9000
+Date: 2020-05-31
 Authors@R: c(person("Matthew", "Kay", role = c("aut", "cre"),
     email = "mjskay@umich.edu"))
 Maintainer: Matthew Kay <mjskay@umich.edu>
-Description: Extends tidybayes to support composing data for and gathering samples from
+Description: Extends tidybayes to support composing data for and gathering draws from
     models fit using Richard McElreath's rethinking package in a tidy data format.
 Depends:
     R (>= 2.10)
