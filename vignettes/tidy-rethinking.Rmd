@@ -16,16 +16,28 @@ vignette: >
 .kable-table table {
   margin-left: 0;
 }
+img {
+  border: none;
+}
 </style>
 
+```{r chunk_options, include=FALSE}
+knitr::opts_chunk$set(
+  eval = if (isTRUE(exists("params"))) params$EVAL else FALSE
+)
+if (capabilities("cairo")) {
+  knitr::opts_chunk$set(
+    dev.args = list(png = list(type = "cairo"))
+  )
+}
+```
 
 ## Introduction
   
-This vignette describes how to use the `tidybayes` package to extract tidy samples from `rethinking`. For a more general introduction to `tidybayes` and its use on more general-purpose sampling languages (like Stan and JAGS), see `vignette("tidybayes")`.
-  
-The default output data formats of popular samplers like JAGS and Stan often don't quite conform to the ideal of [tidy data](http://dx.doi.org/10.18637/jss.v059.i10). Output formats will often be in matrix form (requiring conversion for use with libraries like ggplot). `tidybayes` automates munging the samples into tidy formats.
-  
-  
+This vignette describes how to use the `tidybayes.rethinking` and `tidybayes` packages to extract [tidy](http://dx.doi.org/10.18637/jss.v059.i10) data frames of draws from posterior distributions of model variables, fits, and predictions from models fit in Richard McElreath's [`rethinking` package](https://github.com/rmcelreath/rethinking), the companion to [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/). 
+
+Because the `rethinking` package is not on CRAN, the code necessary to support that package is kept here, in the `tidybayes.rethinking` package. For a more general introduction to `tidybayes` and its use on general-purpose Bayesian modeling languages (like Stan and JAGS), see <code>[vignette("tidybayes", package = "tidybayes")](http://mjskay.github.io/tidybayes/articles/tidybayes.html)</code>.
+
 ## Setup
   
 The following libraries are required to run this vignette:
@@ -33,12 +45,22 @@ The following libraries are required to run this vignette:
 ```{r setup, message = FALSE, warning = FALSE}
 library(magrittr)
 library(dplyr)
+library(purrr)
+library(forcats)
+library(tidyr)
+library(modelr)
 library(tidybayes)
 library(tidybayes.rethinking)
 library(ggplot2)
 library(ggstance)
+library(cowplot)
 library(rstan)
 library(rethinking)
+library(ggrepel)
+library(RColorBrewer)
+library(gganimate)
+
+theme_set(theme_tidybayes() + panel_border())
 ```
 
 These options help Stan run faster:
@@ -47,22 +69,6 @@ These options help Stan run faster:
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 ```
-
-```{r hidden_options, include=FALSE}
-# While the previous code chunk is the actual recommended approach,
-# CRAN vignette building policy limits us to 2 cores, so we use at most
-# 2 to build this vignette (but show the previous chunk to
-# the reader as a best pratice example)
-rstan_options(auto_write = TRUE)
-options(mc.cores = min(2, parallel::detectCores()))
-
-#ggplot options
-theme_set(theme_light())
-
-#figure options
-knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
-```
-
 
 ## Example dataset
 
@@ -73,8 +79,8 @@ set.seed(5)
 n = 10
 n_condition = 5
 ABC =
-  data_frame(
-    condition = rep(c("A","B","C","D","E"), n),
+  tibble(
+    condition = factor(rep(c("A","B","C","D","E"), n)),
     response = rnorm(n * 5, c(0,1,2,1,-1), 0.5)
   )
 ```
@@ -84,11 +90,10 @@ A snapshot of the data looks like this:
 ```{r}
 head(ABC, 10)
 ```
-*(10 rows of `r nrow(ABC)`)*
 
 This is a typical tidy format data frame: one observation per row. Graphically:
 
-```{r}
+```{r fig.width = tiny_width, fig.height = tiny_height}
 ABC %>%
   ggplot(aes(y = condition, x = response)) +
   geom_point()
@@ -96,4 +101,35 @@ ABC %>%
 
 ## Model
 
-TBD.
+Let's fit a linear regression model using a quadratic approximation (`quap`):
+
+```{r m_quap, cache = TRUE}
+m_quap <- quap(alist(
+    response ~ dnorm(mu, sigma),
+    mu <- intercept[condition],
+    intercept[condition] ~ dnorm(0, 10),
+    sigma ~ dexp(1)
+  ), 
+  data = ABC
+)
+```
+
+The results look like this:
+
+```{r}
+m_quap %>%
+  tidy_draws()
+```
+
+
+```{r m_quap, cache = TRUE}
+m_ulam <- ulam(alist(
+    response ~ normal(mu, sigma),
+    mu <- intercept[condition],
+    intercept[condition] ~ normal(0, 10),
+    sigma ~ exponential(1)
+  ), 
+  data = ABC,
+  chains = 2
+)
+```
