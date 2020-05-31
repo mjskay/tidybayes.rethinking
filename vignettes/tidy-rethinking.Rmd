@@ -1,5 +1,5 @@
 ---
-title: "Extracting tidy samples from rethinking models"
+title: "Extracting and visualizing tidy draws from rethinking models"
 author: "Matthew Kay"
 date: "`r Sys.Date()`"
 output: 
@@ -7,7 +7,7 @@ output:
     toc: true
     df_print: kable
 vignette: >
-  %\VignetteIndexEntry{Extracting tidy data from rstanarm}
+  %\VignetteIndexEntry{Extracting and visualizing tidy draws from rethinking models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
