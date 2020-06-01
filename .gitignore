@@ -5,3 +5,4 @@
 .RData
 .Rproj*
 *.Rproj
+vignettes/*_cache/

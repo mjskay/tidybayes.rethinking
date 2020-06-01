@@ -3,11 +3,17 @@
 \name{tidy_draws.map}
 \alias{tidy_draws.map}
 \alias{tidy_draws.quap}
+\alias{tidy_draws.map2stan}
+\alias{tidy_draws.ulam}
 \title{Get a sample of posterior draws from quap and map models as a tibble}
 \usage{
-\method{tidy_draws}{map}(model, n = 10000, ...)
+\method{tidy_draws}{map}(model, n = 5000, ...)
 
-\method{tidy_draws}{quap}(model, n = 10000, ...)
+\method{tidy_draws}{quap}(model, n = 5000, ...)
+
+\method{tidy_draws}{map2stan}(model, ...)
+
+\method{tidy_draws}{ulam}(model, ...)
 }
 \description{
 Implementation of \code{\link[tidybayes:tidy_draws]{tidybayes::tidy_draws()}} for \code{\link[rethinking:map]{rethinking::map()}} and \code{\link[rethinking:quap]{rethinking::quap()}}
@@ -31,7 +37,7 @@ documentation for more information.
 
 library(rethinking)
 library(tidybayes)
-library(magrittr)
+library(dplyr)
 
 m = quap(alist(
     mpg ~ dlnorm(mu, sigma),

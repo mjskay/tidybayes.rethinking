@@ -1,4 +1,4 @@
-# Tests for predicted_samples
+# Tests for fitted_draws
 #
 # Author: mjskay
 ###############################################################################
@@ -7,4 +7,4 @@ library(testthat)
 library(tidybayes)
 library(tidybayes.rethinking)
 
-context("predicted_samples")
+context("fitted_draws")

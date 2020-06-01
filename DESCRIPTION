@@ -11,19 +11,18 @@ Depends:
     R (>= 2.10)
 Imports:
     dplyr,
+    tibble,
+    rlang,
     MASS,
-    tidybayes (>= 1.0),
+    tidybayes (>= 2.0.3),
     rethinking,
     rstan
 Suggests:
     ggplot2,
-    ggstance,
     magrittr,
     tidyr,
     knitr,
-    import,
-    testthat,
-    dotwhisker
+    testthat
 Remotes: 
     rmcelreath/rethinking,
     mjskay/tidybayes

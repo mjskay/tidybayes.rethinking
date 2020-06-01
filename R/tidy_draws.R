@@ -28,7 +28,7 @@
 #'
 #' library(rethinking)
 #' library(tidybayes)
-#' library(magrittr)
+#' library(dplyr)
 #'
 #' m = quap(alist(
 #'     mpg ~ dlnorm(mu, sigma),
@@ -50,7 +50,7 @@
 #' @importFrom dplyr bind_cols
 #' @importFrom tibble tibble
 #' @export
-tidy_draws.map = function(model, n = 10000, ...) {
+tidy_draws.map = function(model, n = 5000, ...) {
   mu = rethinking::coef(model)
   draws = as_tibble(mvrnorm(n = n, mu = mu, Sigma = rethinking::vcov(model)))
 
@@ -71,6 +71,7 @@ tidy_draws.map = function(model, n = 10000, ...) {
 #' @export
 tidy_draws.quap = tidy_draws.map
 
+#' @rdname tidy_draws.map
 #' @export
 tidy_draws.map2stan = function(model, ...) {
   draws = tidy_draws(model@stanfit, ...)
@@ -79,5 +80,6 @@ tidy_draws.map2stan = function(model, ...) {
   draws
 }
 
+#' @rdname tidy_draws.map
 #' @export
 tidy_draws.ulam = tidy_draws.map2stan
