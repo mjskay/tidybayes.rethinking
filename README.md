@@ -1,8 +1,8 @@
 
 # tidybayes.rethinking: Extend tidybayes to work with the rethinking package <img id="tidybayes_logo" src="man/figures/logo.svg" align="right" />
 
-[![Build
-Status](https://travis-ci.org/mjskay/tidybayes.png?branch=master)](https://travis-ci.org/mjskay/tidybayes)
+[![R build
+status](https://github.com/mjskay/tidybayes.rethinking/workflows/R-CMD-check/badge.svg)](https://github.com/mjskay/tidybayes.rethinking/actions)
 
 *Matthew Kay, University of Michigan, <mjskay@umich.edu>*
 
@@ -29,8 +29,8 @@ devtools::install_github("mjskay/tidybayes.rethinking")
 See the
 [tidy-rethinking](https://mjskay.github.io/tidybayes.rethinking/articles/tidy-rethinking.html)
 vignette for `rethinking`-specific examples, or check out the
-[tidybayes](https://mjskay.github.io/tidybayes/) documentation for a
-variety of examples.
+[tidybayes](https://mjskay.github.io/tidybayes/) documentation for more
+general examples of `tidybayes` usage.
 
 ## Feedback and issues
 
