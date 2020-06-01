@@ -28,7 +28,7 @@ Remotes:
     mjskay/tidybayes
 License: GPL (>= 3)
 BugReports: https://github.com/mjskay/tidybayes.rethinking/issues/new
-URL: https://github.com/mjskay/tidybayes.rethinking
+URL: http://mjskay.github.io/tidybayes.rethinking, https://github.com/mjskay/tidybayes.rethinking
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 LazyData: true
