@@ -125,7 +125,7 @@ fitted_draws.ulam = function(model, newdata, value = ".value", ..., post = NULL,
   if (unpermute_samples) {
     # unpermute the samples
     # TODO: this is an awful hack!
-    perm = stanfit_permutation(m_cyl@stanfit)
+    perm = stanfit_permutation(model@stanfit)
     draws$.draw = perm[draws$.draw]
   }
 
