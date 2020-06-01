@@ -15,6 +15,15 @@
 
 \method{tidy_draws}{ulam}(model, ...)
 }
+\arguments{
+\item{model}{A model fit using \code{rethinking::map()}, \code{rethinking::quap()},
+\code{rethinking::map2stan()}, or \code{rethinking::ulam()}}
+
+\item{n}{For \code{map} and \code{quap} models, the number of draws to generate (defaults to 5000).
+Ignored for \code{map2stan} and \code{ulam} models.}
+
+\item{...}{Further arguments passed to other methods (mostly unused).}
+}
 \description{
 Implementation of \code{\link[tidybayes:tidy_draws]{tidybayes::tidy_draws()}} for \code{\link[rethinking:map]{rethinking::map()}} and \code{\link[rethinking:quap]{rethinking::quap()}}
 models. Extract draws from a Bayesian fit into a wide-format data frame with a

@@ -7,6 +7,8 @@
 # deprecated names for fitted_draws -------------------------------
 
 #' @rdname tidybayes.rethinking-deprecated
+#' @format NULL
+#' @usage NULL
 #' @importFrom tidybayes fitted_draws
 #' @export
 tidy_link = function(data, fit, ...) {
@@ -48,7 +50,8 @@ tidy_link = function(data, fit, ...) {
 #' always applied.
 #' @param re_formula,category Not used with this model type.
 #' @importFrom rlang is_true is_false is_empty
-#' @importFrom tidybayes fitted_draws add_draws
+#' @importFrom tidybayes fitted_draws add_draws sample_draws
+#' @importFrom rethinking extract.samples
 #' @export
 fitted_draws.ulam = function(model, newdata, value = ".value", ..., post = NULL, n = NULL, seed = NULL,
   scale = c("response", "linear"), dpar = FALSE, re_formula = NULL, category = ".category"
@@ -156,7 +159,8 @@ stanfit_permutation = function(stanfit) {
   # the draw order permutation in a stanfit used with rstan::extract()
   chain_perm = stanfit@sim$permutation
   n_per_chain = length(chain_perm[[1]])
-  unlist(map2(seq_along(chain_perm), chain_perm, function(chain, perm) {
+  unlist(lapply(seq_along(chain_perm), function(chain) {
+    perm = chain_perm[[chain]]
     (chain - 1)*n_per_chain + perm
   }))
 }

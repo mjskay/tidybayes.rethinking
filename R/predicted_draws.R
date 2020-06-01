@@ -7,6 +7,8 @@
 # deprecated names for predicted_draws -------------------------------
 
 #' @rdname tidybayes.rethinking-deprecated
+#' @format NULL
+#' @usage NULL
 #' @importFrom tidybayes predicted_draws
 #' @export
 tidy_sim = function(data, fit, ...) {
@@ -34,7 +36,7 @@ tidy_sim = function(data, fit, ...) {
 #' return 5000 draws.
 #' @param re_formula,category Not used with this model type.
 #' @importFrom rlang is_true is_false is_empty
-#' @importFrom tidybayes predicted_draws add_draws
+#' @importFrom tidybayes predicted_draws add_draws sample_draws
 #' @export
 predicted_draws.ulam = function(model, newdata, prediction = ".prediction", ..., n = NULL, seed = NULL,
   re_formula = NULL, category = ".category"

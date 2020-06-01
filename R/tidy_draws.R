@@ -14,6 +14,11 @@
 #' generally speaking not as useful as [spread_draws()] or
 #' [gather_draws()] for most applications, and is mainly used internally.
 #'
+#' @param model A model fit using `rethinking::map()`, `rethinking::quap()`,
+#' `rethinking::map2stan()`, or `rethinking::ulam()`
+#' @param n For `map` and `quap` models, the number of draws to generate (defaults to 5000).
+#' Ignored for `map2stan` and `ulam` models.
+#' @param ... Further arguments passed to other methods (mostly unused).
 #' @details
 #'
 #' The main additional functionality compared to [tidybayes::tidy_draws()] when used on
@@ -48,7 +53,7 @@
 #' @importFrom tidybayes tidy_draws
 #' @importFrom MASS mvrnorm
 #' @importFrom dplyr bind_cols
-#' @importFrom tibble tibble
+#' @importFrom tibble tibble as_tibble
 #' @export
 tidy_draws.map = function(model, n = 5000, ...) {
   mu = rethinking::coef(model)

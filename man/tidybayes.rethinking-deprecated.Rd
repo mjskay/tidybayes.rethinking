@@ -6,11 +6,6 @@
 \alias{tidy_link}
 \alias{tidy_sim}
 \title{Deprecated functions, arguments, and column names in tidybayes}
-\usage{
-tidy_link(data, fit, ...)
-
-tidy_sim(data, fit, ...)
-}
 \description{
 Deprecated functions, arguments, and column names and their alternatives are listed below.
 }
