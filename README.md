@@ -7,39 +7,46 @@ Status](https://travis-ci.org/mjskay/tidybayes.png?branch=master)](https://travi
 *Matthew Kay, University of Michigan, <mjskay@umich.edu>*
 
 This package extends the
-[tidybayes](https://github.com/mjskay/tidybayes) R package to support
+[tidybayes](https://mjskay.github.io/tidybayes/) R package to support
 models from Richard McElreath’s
-[rethinking](https://github.com/rmcelreath/rethinking) package. It is
-separate from the core `tidybayes` package because `rethinking` is not
-currently available on CRAN.
+[rethinking](https://github.com/rmcelreath/rethinking) package.
 
 ## Installation
 
-If you haven’t already, install the `rethinking` package per the
-instructions on [the rethinking
-page](https://github.com/rmcelreath/rethinking), and install `tidybayes`
-per the instructions on [the tidybayes
-page](https://github.com/mjskay/tidybayes).
+`tidybayes.rethinking` is separate from the core `tidybayes` package
+because `rethinking` is not currently available on CRAN. Thus,
+`tidybayes.rethinking` is also not available on CRAN.
 
-Then, install `tidybayes.rethinking` from github:
+You can install `tidybayes.rethinking` from Github:
 
 ``` r
-install.packages("devtools")
+install.packages("devtools")     # only necessary if you don't have devtools already
 devtools::install_github("mjskay/tidybayes.rethinking")
 ```
 
 ## Examples
 
-See the [tidybayes](https://github.com/mjskay/tidybayes) documentation,
-or check out `vignette("tidybayes")` for a variety of examples.
+See the
+[tidy-rethinking](https://mjskay.github.io/tidybayes.rethinking/articles/tidy-rethinking.html)
+vignette for `rethinking`-specific examples, or check out the
+[tidybayes](https://mjskay.github.io/tidybayes/) documentation for a
+variety of examples.
 
 ## Feedback and issues
 
-I welcome feedback, suggestions, and issues\! Contact me at
-<mjskay@umich.edu>. If you have found a bug, please file it
-[here](https://github.com/mjskay/tidybayes/issues/new) with minimal code
-to reproduce the issue.
+I welcome feedback, suggestions, and issues\! If you have found a bug in
+the rethinking-specific version of functions, please file it on [the
+tidybayes.rethinking
+github](https://github.com/mjskay/tidybayes.rethinking/issues/new) with
+minimal code to reproduce the issue. For general `tidybayes` issues,
+please file bugs on [the tidybayes
+github](https://github.com/mjskay/tidybayes/issues/new). If you’re not
+sure which it falls under, file it on one or the other and I will
+redirect the issue if necessary.
 
-`tidybayes` grew out of helper functions I wrote to make my own analysis
-pipelines tidier. Over time it has expanded to cover more use cases I
-have encountered, but I would love to make it cover more\!
+## Citing `tidybayes`
+
+Matthew Kay (2020). *tidybayes: Tidy Data and Geoms for Bayesian
+Models*. R package version 2.0.3.9000,
+<https://mjskay.github.io/tidybayes/>. DOI:
+[10.5281/zenodo.1308151](https://doi.org/10.5281/zenodo.1308151).

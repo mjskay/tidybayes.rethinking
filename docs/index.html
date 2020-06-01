@@ -99,25 +99,31 @@
 </h1></div>
 
 <p><em>Matthew Kay, University of Michigan, <a href="mailto:mjskay@umich.edu" class="email">mjskay@umich.edu</a></em></p>
-<p>This package extends the <a href="https://github.com/mjskay/tidybayes">tidybayes</a> R package to support models from Richard McElreath’s <a href="https://github.com/rmcelreath/rethinking">rethinking</a> package. It is separate from the core <code>tidybayes</code> package because <code>rethinking</code> is not currently available on CRAN.</p>
+<p>This package extends the <a href="https://mjskay.github.io/tidybayes/">tidybayes</a> R package to support models from Richard McElreath’s <a href="https://github.com/rmcelreath/rethinking">rethinking</a> package.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>If you haven’t already, install the <code>rethinking</code> package per the instructions on <a href="https://github.com/rmcelreath/rethinking">the rethinking page</a>, and install <code>tidybayes</code> per the instructions on <a href="https://github.com/mjskay/tidybayes">the tidybayes page</a>.</p>
-<p>Then, install <code>tidybayes.rethinking</code> from github:</p>
-<div class="sourceCode" id="cb1"><pre class="r">install.packages("devtools")
-devtools::install_github("mjskay/tidybayes.rethinking")</pre></div>
+<p><code>tidybayes.rethinking</code> is separate from the core <code>tidybayes</code> package because <code>rethinking</code> is not currently available on CRAN. Thus, <code>tidybayes.rethinking</code> is also not available on CRAN.</p>
+<p>You can install <code>tidybayes.rethinking</code> from Github:</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)     <span class="co"># only necessary if you don't have devtools already
+</span>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"mjskay/tidybayes.rethinking"</span>)</pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<p>See the <a href="https://github.com/mjskay/tidybayes">tidybayes</a> documentation, or check out <code>vignette("tidybayes")</code> for a variety of examples.</p>
+<p>See the <a href="https://mjskay.github.io/tidybayes.rethinking/articles/tidy-rethinking.html">tidy-rethinking</a> vignette for <code>rethinking</code>-specific examples, or check out the <a href="https://mjskay.github.io/tidybayes/">tidybayes</a> documentation for a variety of examples.</p>
 </div>
 <div id="feedback-and-issues" class="section level2">
 <h2 class="hasAnchor">
 <a href="#feedback-and-issues" class="anchor"></a>Feedback and issues</h2>
-<p>I welcome feedback, suggestions, and issues! Contact me at <a href="mailto:mjskay@umich.edu" class="email">mjskay@umich.edu</a>. If you have found a bug, please file it <a href="https://github.com/mjskay/tidybayes/issues/new">here</a> with minimal code to reproduce the issue.</p>
-<p><code>tidybayes</code> grew out of helper functions I wrote to make my own analysis pipelines tidier. Over time it has expanded to cover more use cases I have encountered, but I would love to make it cover more!</p>
+<p>I welcome feedback, suggestions, and issues! If you have found a bug in the rethinking-specific version of functions, please file it on <a href="https://github.com/mjskay/tidybayes.rethinking/issues/new">the tidybayes.rethinking github</a> with minimal code to reproduce the issue. For general <code>tidybayes</code> issues, please file bugs on <a href="https://github.com/mjskay/tidybayes/issues/new">the tidybayes github</a>. If you’re not sure which it falls under, file it on one or the other and I will redirect the issue if necessary.</p>
+</div>
+<div id="citing-tidybayes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#citing-tidybayes" class="anchor"></a>Citing <code>tidybayes</code>
+</h2>
+<p>Matthew Kay (2020). <em>tidybayes: Tidy Data and Geoms for Bayesian Models</em>. R package version 2.0.3.9000, <a href="https://mjskay.github.io/tidybayes/" class="uri">https://mjskay.github.io/tidybayes/</a>. DOI: <a href="https://doi.org/10.5281/zenodo.1308151">10.5281/zenodo.1308151</a>.</p>
 </div>
 </div>
   </div>
