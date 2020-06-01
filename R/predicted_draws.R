@@ -3,6 +3,21 @@
 # Author: mjskay
 ###############################################################################
 
+
+# deprecated names for predicted_draws -------------------------------
+
+#' @rdname tidybayes.rethinking-deprecated
+#' @importFrom tidybayes predicted_draws
+#' @export
+tidy_sim = function(data, fit, ...) {
+  .Deprecated("add_predicted_draws", "tidybayes.rethinking")
+
+  fitted_draws(model = fit, newdata = data, ...)
+}
+
+
+# predicted_draws ------------------------------------------------------------
+
 #' Add draws from the posterior predictive of a rethinking model to a data frame
 #'
 #' Adds draws from the posterior predictive distribution of a rethinking model to a data frame.

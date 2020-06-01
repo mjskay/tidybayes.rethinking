@@ -3,6 +3,21 @@
 # Author: mjskay
 ###############################################################################
 
+
+# deprecated names for fitted_draws -------------------------------
+
+#' @rdname tidybayes.rethinking-deprecated
+#' @importFrom tidybayes fitted_draws
+#' @export
+tidy_link = function(data, fit, ...) {
+  .Deprecated("add_fitted_draws", "tidybayes.rethinking")
+
+  fitted_draws(model = fit, newdata = data, ...)
+}
+
+
+# fitted_draws ------------------------------------------------------------
+
 #' Add draws from the posterior link-level predictor of a rethinking model to a data frame
 #'
 #' Adds draws from the posterior link-level predictor of a rethinking model to a data frame.
