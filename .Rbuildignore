@@ -6,6 +6,7 @@
 ^\.gitignore$
 ^\.gitattributes$
 ^\.git$
+^\.github$
 ^\.travis\.yml$
 ^README.Rmd$
 ^README_files$
