@@ -1,16 +1,25 @@
-tidybayes.rethinking: R Package to extend tidybayes to work with the rethinking package
-================
 
-[![Build Status](https://travis-ci.org/mjskay/tidybayes.png?branch=master)](https://travis-ci.org/mjskay/tidybayes)
+# tidybayes.rethinking: Extend tidybayes to work with the rethinking package <img id="tidybayes_logo" src="man/figures/logo.svg" align="right" />
+
+[![Build
+Status](https://travis-ci.org/mjskay/tidybayes.png?branch=master)](https://travis-ci.org/mjskay/tidybayes)
 
 *Matthew Kay, University of Michigan, <mjskay@umich.edu>*
 
-This package extends the [tidybayes](https://github.com/mjskay/tidybayes) R package to support models from Richard McElreath's [rethinking](https://github.com/rmcelreath/rethinking) package. It is separate from the core `tidybayes` package because `rethinking` is not currently available on CRAN.
+This package extends the
+[tidybayes](https://github.com/mjskay/tidybayes) R package to support
+models from Richard McElreath’s
+[rethinking](https://github.com/rmcelreath/rethinking) package. It is
+separate from the core `tidybayes` package because `rethinking` is not
+currently available on CRAN.
 
-Installation
-------------
+## Installation
 
-If you haven't already, install the `rethinking` package per the instructions on [the rethinking page](https://github.com/rmcelreath/rethinking), and install `tidybayes` per the instructions on [the tidybayes page](https://github.com/mjskay/tidybayes).
+If you haven’t already, install the `rethinking` package per the
+instructions on [the rethinking
+page](https://github.com/rmcelreath/rethinking), and install `tidybayes`
+per the instructions on [the tidybayes
+page](https://github.com/mjskay/tidybayes).
 
 Then, install `tidybayes.rethinking` from github:
 
@@ -19,14 +28,18 @@ install.packages("devtools")
 devtools::install_github("mjskay/tidybayes.rethinking")
 ```
 
-Examples
---------
+## Examples
 
-See the [tidybayes](https://github.com/mjskay/tidybayes) documentation, or check out `vignette("tidybayes")` for a variety of examples.
+See the [tidybayes](https://github.com/mjskay/tidybayes) documentation,
+or check out `vignette("tidybayes")` for a variety of examples.
 
-Feedback and issues
--------------------
+## Feedback and issues
 
-I welcome feedback, suggestions, and issues! Contact me at <mjskay@umich.edu>. If you have found a bug, please file it [here](https://github.com/mjskay/tidybayes/issues/new) with minimal code to reproduce the issue.
+I welcome feedback, suggestions, and issues\! Contact me at
+<mjskay@umich.edu>. If you have found a bug, please file it
+[here](https://github.com/mjskay/tidybayes/issues/new) with minimal code
+to reproduce the issue.
 
-`tidybayes` grew out of helper functions I wrote to make my own analysis pipelines tidier. Over time it has expanded to cover more use cases I have encountered, but I would love to make it cover more!
+`tidybayes` grew out of helper functions I wrote to make my own analysis
+pipelines tidier. Over time it has expanded to cover more use cases I
+have encountered, but I would love to make it cover more\!

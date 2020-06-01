@@ -10,4 +10,8 @@
 ^README.Rmd$
 ^README_files$
 ^.lintr$
+^figures-source$
 ^vignettes/.*_cache$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

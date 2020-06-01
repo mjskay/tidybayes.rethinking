@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://mjskay.github.io/tidybayes.rethinking/index.html</loc>
+  </url>
+  <url>
+    <loc>http://mjskay.github.io/tidybayes.rethinking/reference/fitted_draws.ulam.html</loc>
+  </url>
+  <url>
+    <loc>http://mjskay.github.io/tidybayes.rethinking/reference/predicted_draws.ulam.html</loc>
+  </url>
+  <url>
+    <loc>http://mjskay.github.io/tidybayes.rethinking/reference/tidybayes.rethinking-deprecated.html</loc>
+  </url>
+  <url>
+    <loc>http://mjskay.github.io/tidybayes.rethinking/reference/tidy_draws.map.html</loc>
+  </url>
+  <url>
+    <loc>http://mjskay.github.io/tidybayes.rethinking/articles/tidy-rethinking.html</loc>
+  </url>
+</urlset>

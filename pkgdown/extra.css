@@ -1,0 +1,86 @@
+body {
+  font-size: 15.5px;
+}
+
+.navbar-brand {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+  background-color: #eee;
+}
+
+p.caption {
+  display: none;
+}
+
+h1, .h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+h1 small, .h1 small {
+  font-size: 70%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+img#tidybayes_logo {
+  width: 80px;
+  margin-top: -48px;
+  margin-right: -60px;
+}
+
+.page-header h1 {
+  padding-right: 60px;
+}
+
+@media (max-width: 1200px) {
+  img#tidybayes_logo {
+    display: none;
+  }
+  .page-header h1 {
+    padding-right: 0;
+  }
+}
+
+h2, .h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+h3, .h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h4, .h4 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.contents h1, .contents h2, .contents h3, .contents h4 {
+  margin-bottom: 20px;
+}
+
+.contents .page-header h1 {
+  margin-top: 25px;
+}
+
+.contents h3, .contents h4 {
+  margin-top: -55px;
+}
+
+h4.date, h4.author {
+  font-size: 1em;
+  color: #bbb;
+  display: inline;
+  padding-right: 0.5em;
+}
+
+pre code {
+  font-size: 13.5px;
+  white-space: pre;
+}

@@ -1,9 +1,8 @@
 ---
-title: "tidybayes.rethinking: R Package to extend tidybayes to work with the rethinking package"
-output: 
-  github_document:
-    df_print: kable
+output: github_document
 ---
+
+# tidybayes.rethinking: Extend tidybayes to work with the rethinking package <img id="tidybayes_logo" src="man/figures/logo.svg" align="right" />
 
 [![Build Status](https://travis-ci.org/mjskay/tidybayes.png?branch=master)](https://travis-ci.org/mjskay/tidybayes)
 

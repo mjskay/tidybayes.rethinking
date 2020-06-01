@@ -1,0 +1,30 @@
+url: http://mjskay.github.io/tidybayes.rethinking
+
+
+template:
+  params:
+    bootswatch: paper
+    ganalytics: UA-93322-5
+
+
+authors:
+  Matthew Kay:
+    href: http://www.mjskay.com
+
+
+reference:
+- title: Extracting posteriors
+  desc:  Get tidy draws of posterior distributions from models
+  contents:
+  - tidy_draws.map
+
+- title: Extracting fits and predictions
+  desc:  Get tidy draws from transformed linear predictors ("fits") or posterior predictions
+  contents:
+  - fitted_draws.ulam
+  - predicted_draws.ulam
+
+- title: Deprecated functions
+  desc: Deprecated functions
+  contents:
+  - tidybayes.rethinking-deprecated
