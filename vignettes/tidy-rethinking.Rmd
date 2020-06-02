@@ -110,8 +110,8 @@ ABC %>%
 
 Let's fit a hierarchical linear regression model using Hamiltonian Monte Carlo (`rethinking::ulam()`). Besides a typical multilevel model for the mean, this model also allows the standard deviation to vary by condition:
 
-```{r m_ulam, cache = TRUE, results = "hide"}
-m <- ulam(alist(
+```{r m_ulam, results = "hide", message = FALSE, warning = FALSE}
+m = ulam(alist(
     response ~ normal(mu, sigma),
   
     # submodel for conditional mean
@@ -465,7 +465,7 @@ mtcars_clean = mtcars %>%
 
 Then, we'll fit a naive linear model where cars with different numbers of cylinders each get their own linear relationship between horsepower and miles per gallon:
 
-```{r m_mpg, results = "hide", message = FALSE, warning = FALSE, cache = TRUE}
+```{r m_mpg, results="hide", error=FALSE, message=FALSE}
 m_mpg = ulam(alist(
     mpg ~ normal(mu, sigma),
   
@@ -596,7 +596,7 @@ The `rethinking::link()` function for ordinal models returns draws from the late
 
 We'll fit a model using the `mtcars` dataset that predicts the number of cylinders in a car given the car's mileage (in miles per gallon). While this is a little backwards causality-wise (presumably the number of cylinders causes the mileage, if anything), that does not mean this is not a fine prediction task (I could probably tell someone who knows something about cars the MPG of a car and they could do reasonably well at guessing the number of cylinders in the engine). Here's a simple ordinal regression model:
 
-```{r m_cyl, cache = TRUE, results = "hide"}
+```{r m_cyl, results = "hide", message = FALSE, warning = FALSE}
 m_cyl = ulam(alist(
     cyl ~ dordlogit(phi, cutpoint),
     phi <- b_mpg*mpg,
