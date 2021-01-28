@@ -56,6 +56,15 @@ tidy_link = function(data, fit, ...) {
 fitted_draws.ulam = function(model, newdata, value = ".value", ..., post = NULL, n = NULL, seed = NULL,
   scale = c("response", "linear"), dpar = FALSE, re_formula = NULL, category = ".category"
 ) {
+  
+  
+  ##### need to remove
+  model<-samples_M5.3
+  newdata <- test_d
+  ##### need to remove
+  
+  
+  
   scale = match.arg(scale)
   if (scale != "response") {
     stop(
@@ -74,7 +83,7 @@ fitted_draws.ulam = function(model, newdata, value = ".value", ..., post = NULL,
 
   # map and quap models need to specify the number of draws (since they are generated)
   unpermute_samples = FALSE
-  if (inherits(model, "map") || inherits(model, "quap")){
+  if ((inherits(model, "map") || inherits(model, "quap")) && is.null(n)) {
     if (is.null(n)) {
       n = 5000
     }
