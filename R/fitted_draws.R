@@ -74,7 +74,7 @@ fitted_draws.ulam = function(model, newdata, value = ".value", ..., post = NULL,
 
   # map and quap models need to specify the number of draws (since they are generated)
   unpermute_samples = FALSE
-  if ((inherits(model, "map") || inherits(model, "quap")) && is.null(n)) {
+  if (inherits(model, "map") || inherits(model, "quap")){
     if (is.null(n)) {
       n = 5000
     }
