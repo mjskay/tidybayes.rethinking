@@ -75,6 +75,6 @@ return 5000 draws.}
 }
 \description{
 Adds draws from the posterior predictive distribution of a rethinking model to a data frame.
-Provides support for \code{\link[tidybayes:predicted_draws]{tidybayes::predicted_draws()}} / \code{\link[tidybayes:add_predicted_draws]{tidybayes::add_predicted_draws()}} for
+Provides support for \code{\link[tidybayes:add_predicted_draws]{tidybayes::predicted_draws()}} / \code{\link[tidybayes:add_predicted_draws]{tidybayes::add_predicted_draws()}} for
 models from the \code{rethinking} package.
 }

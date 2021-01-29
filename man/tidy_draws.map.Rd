@@ -25,7 +25,7 @@ Ignored for \code{map2stan} and \code{ulam} models.}
 \item{...}{Further arguments passed to other methods (mostly unused).}
 }
 \description{
-Implementation of \code{\link[tidybayes:tidy_draws]{tidybayes::tidy_draws()}} for \code{\link[rethinking:map]{rethinking::map()}} and \code{\link[rethinking:quap]{rethinking::quap()}}
+Implementation of \code{\link[tidybayes:tidy_draws]{tidybayes::tidy_draws()}} for \code{\link[rethinking:quap]{rethinking::map()}} and \code{\link[rethinking:quap]{rethinking::quap()}}
 models. Extract draws from a Bayesian fit into a wide-format data frame with a
 \code{.chain}, \code{.iteration}, and \code{.draw} column, as well as all variables as columns.
 While this function can be useful for quick glances at models (especially

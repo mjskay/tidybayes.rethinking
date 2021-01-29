@@ -102,7 +102,7 @@ models from the rethinking package." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -125,7 +125,7 @@ models from the rethinking package." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mjskay/tidybayes.rethinking/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -154,52 +154,52 @@ models from the <code>rethinking</code> package.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ulam</span>
-<span class='fu'>predicted_draws</span>(
-  <span class='no'>model</span>,
-  <span class='no'>newdata</span>,
-  <span class='kw'>prediction</span> <span class='kw'>=</span> <span class='st'>".prediction"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>re_formula</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>".category"</span>
-)
+<span class='fu'>predicted_draws</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>newdata</span>,
+  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
+  category <span class='op'>=</span> <span class='st'>".category"</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for quap</span>
-<span class='fu'>predicted_draws</span>(
-  <span class='no'>model</span>,
-  <span class='no'>newdata</span>,
-  <span class='kw'>prediction</span> <span class='kw'>=</span> <span class='st'>".prediction"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>re_formula</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>".category"</span>
-)
+<span class='fu'>predicted_draws</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>newdata</span>,
+  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
+  category <span class='op'>=</span> <span class='st'>".category"</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for map</span>
-<span class='fu'>predicted_draws</span>(
-  <span class='no'>model</span>,
-  <span class='no'>newdata</span>,
-  <span class='kw'>prediction</span> <span class='kw'>=</span> <span class='st'>".prediction"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>re_formula</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>".category"</span>
-)
+<span class='fu'>predicted_draws</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>newdata</span>,
+  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
+  category <span class='op'>=</span> <span class='st'>".category"</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for map2stan</span>
-<span class='fu'>predicted_draws</span>(
-  <span class='no'>model</span>,
-  <span class='no'>newdata</span>,
-  <span class='kw'>prediction</span> <span class='kw'>=</span> <span class='st'>".prediction"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>re_formula</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>".category"</span>
-)</pre>
+<span class='fu'>predicted_draws</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>newdata</span>,
+  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
+  category <span class='op'>=</span> <span class='st'>".category"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -256,7 +256,7 @@ return 5000 draws.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

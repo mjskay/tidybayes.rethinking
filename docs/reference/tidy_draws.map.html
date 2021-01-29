@@ -106,7 +106,7 @@ gather_draws() for most applications, and is mainly used internally." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -129,7 +129,7 @@ gather_draws() for most applications, and is mainly used internally." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mjskay/tidybayes.rethinking/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -162,16 +162,16 @@ generally speaking not as useful as <code>spread_draws()</code> or
     </div>
 
     <pre class="usage"><span class='co'># S3 method for map</span>
-<span class='fu'>tidy_draws</span>(<span class='no'>model</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='no'>...</span>)
+<span class='fu'>tidy_draws</span><span class='op'>(</span><span class='va'>model</span>, n <span class='op'>=</span> <span class='fl'>5000</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for quap</span>
-<span class='fu'>tidy_draws</span>(<span class='no'>model</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='no'>...</span>)
+<span class='fu'>tidy_draws</span><span class='op'>(</span><span class='va'>model</span>, n <span class='op'>=</span> <span class='fl'>5000</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for map2stan</span>
-<span class='fu'>tidy_draws</span>(<span class='no'>model</span>, <span class='no'>...</span>)
+<span class='fu'>tidy_draws</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ulam</span>
-<span class='fu'>tidy_draws</span>(<span class='no'>model</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>tidy_draws</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,35 +204,36 @@ documentation for more information.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>rethinking</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstan</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: StanHeaders</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>rstan (Version 2.19.3, GitRev: 2e1f913d3ca3)</span></div><div class='output co'>#&gt; <span class='message'>For execution on a local, multicore CPU with excess RAM we recommend calling</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>rethinking</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstan</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: StanHeaders</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>rstan (Version 2.21.2, GitRev: 2e1f913d3ca3)</span></div><div class='output co'>#&gt; <span class='message'>For execution on a local, multicore CPU with excess RAM we recommend calling</span>
 #&gt; <span class='message'>options(mc.cores = parallel::detectCores()).</span>
 #&gt; <span class='message'>To avoid recompilation of unchanged Stan programs, we recommend calling</span>
-#&gt; <span class='message'>rstan_options(auto_write = TRUE)</span></div><div class='output co'>#&gt; <span class='message'>For improved execution time, we recommend calling</span>
-#&gt; <span class='message'>Sys.setenv(LOCAL_CPPFLAGS = '-march=corei7 -mtune=corei7')</span>
-#&gt; <span class='message'>although this causes Stan to throw an error on a few processors.</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: parallel</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: dagitty</span></div><div class='output co'>#&gt; <span class='message'>rethinking (Version 2.01)</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>rstan_options(auto_write = TRUE)</span></div><div class='output co'>#&gt; <span class='message'>Do not specify '-march=native' in 'LOCAL_CPPFLAGS' or a Makevars file</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: parallel</span></div><div class='output co'>#&gt; <span class='message'>rethinking (Version 2.13)</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'rethinking'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:stats':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    rstudent</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidybayes</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>    rstudent</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mjskay.github.io/tidybayes/'>tidybayes</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
-<span class='no'>m</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/rethinking/man/quap.html'>quap</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>alist</a></span>(
-    <span class='no'>mpg</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/Lognormal.html'>dlnorm</a></span>(<span class='no'>mu</span>, <span class='no'>sigma</span>),
-    <span class='no'>mu</span> <span class='kw'>&lt;-</span> <span class='no'>a</span> + <span class='no'>b</span>*<span class='no'>wt</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>,<span class='no'>b</span>) ~ <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>dnorm</a></span>(<span class='fl'>0</span>, <span class='fl'>10</span>),
-    <span class='no'>sigma</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/Exponential.html'>dexp</a></span>(<span class='fl'>1</span>)
-  ),
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
-  <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>b</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-)
+<span class='va'>m</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/rethinking/man/quap.html'>quap</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>alist</a></span><span class='op'>(</span>
+    <span class='va'>mpg</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/Lognormal.html'>dlnorm</a></span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span><span class='op'>)</span>,
+    <span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='va'>a</span> <span class='op'>+</span> <span class='va'>b</span><span class='op'>*</span><span class='va'>wt</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>dnorm</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span><span class='op'>)</span>,
+    <span class='va'>sigma</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/Exponential.html'>dexp</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+  <span class='op'>)</span>,
+  data <span class='op'>=</span> <span class='va'>mtcars</span>,
+  start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>4</span>, b <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>, sigma <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='no'>m</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/tidy_draws.html'>tidy_draws</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/gather_variables.html'>gather_variables</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/point_interval.html'>median_qi</a></span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 7</span><span>
+<span class='va'>m</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/tidy_draws.html'>tidy_draws</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='http://mjskay.github.io/tidybayes/reference/gather_variables.html'>gather_variables</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='http://mjskay.github.io/ggdist/reference/point_interval.html'>median_qi</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 7</span><span>
 #&gt;   .variable .value  .lower .upper .width .point .interval
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'>1</span><span> a          3.83   3.67    3.99    0.95 median qi       
@@ -254,7 +255,7 @@ documentation for more information.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

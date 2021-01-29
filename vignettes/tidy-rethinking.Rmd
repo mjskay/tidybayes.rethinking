@@ -42,7 +42,7 @@ if (capabilities("cairo")) {
   
 This vignette describes how to use the `tidybayes.rethinking` and `tidybayes` packages to extract [tidy](http://dx.doi.org/10.18637/jss.v059.i10) data frames of draws from posterior distributions of model variables, fits, and predictions from models fit in Richard McElreath's [`rethinking` package](https://github.com/rmcelreath/rethinking), the companion to [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/). 
 
-Because the `rethinking` package is not on CRAN, the code necessary to support that package is kept here, in the `tidybayes.rethinking` package. For a more general introduction to `tidybayes` and its use on general-purpose Bayesian modeling languages (like Stan and JAGS), see <code>[vignette("tidybayes", package = "tidybayes")](http://mjskay.github.io/tidybayes/articles/tidybayes.html)</code>.
+Because the `rethinking` package is not on CRAN, the code necessary to support that package is kept here, in the `tidybayes.rethinking` package. For a more general introduction to `tidybayes` and its use on general-purpose Bayesian modeling languages (like Stan and JAGS), see `vignette("tidybayes", package = "tidybayes")`.
 
 While this vignette generally demonstrates use of tidybayes with models fit using `rethinking::ulam()` (models fit using Stan), the same functions also work for other model types in the `rethinking` package, including `rethinking::quap()`, `rethinking::map()`, and `rethinking::map2stan()`. For `quap()` and `map()`, the tidybayes functions will generate draws from the approximate posterior for you. This makes it easy to move between model types without changing your workflow.
 
@@ -216,7 +216,7 @@ m %>%
   median_qi()
 ```
 
-For more on `gather_draws`, see `vignette("tidybayes", package = "tidybayes")`.
+For more on `gather_draws()`, see `vignette("tidybayes", package = "tidybayes")`.
 
 ### With indexed variables
 
@@ -241,62 +241,60 @@ When given only a single column, `median_qi` will use the names `.lower` and `.u
 
 ## Plotting points and intervals
 
-### Using `geom_pointinterval`/`geom_pointintervalh`
+### Using `geom_pointinterval`
 
-Plotting medians and intervals is straightforward using the `pointinterval` geom (or its horizontal version, `pointintervalh`), which are similar to `ggplot2::geom_pointrange()` but with sensible defaults for multiple intervals (functionality we will use later):
+Plotting medians and intervals is straightforward using `geom_pointinterval()` geom, which is similar to `ggplot2::geom_pointrange()` but with sensible defaults for multiple intervals (functionality we will use later):
 
 ```{r fig.width = tiny_width, fig.height = tiny_height}
 m %>%
   spread_draws(intercept[condition]) %>%
   median_qi() %>%
-  # `geom_pointintervalh` includes `xmin = .lower` and `xmax = .upper` in its default 
-  # aesthetics, so we can omit them here
-  ggplot(aes(y = fct_rev(condition), x = intercept)) +
-  geom_pointintervalh()
+  ggplot(aes(y = fct_rev(condition), x = intercept, xmin = .lower, xmax = .upper)) +
+  geom_pointinterval()
 ```
 
-### Using `stat_pointinterval`/`stat_pointintervalh`
+### Using `stat_pointinterval`
 
-Rather than summarizing the posterior before calling ggplot, we could also use `stat_pointinterval()` or `stat_pointintervalh()` to perform the summary within ggplot:
+Rather than summarizing the posterior before calling ggplot, we could also use `stat_pointinterval()` to perform the summary within ggplot:
 
 ```{r fig.width = tiny_width, fig.height = tiny_height}
 m %>%
   spread_draws(intercept[condition]) %>%
   ggplot(aes(y = fct_rev(condition), x = intercept)) +
-  stat_pointintervalh()
+  stat_pointinterval()
 ```
 
-These functions have `.width = c(.66, .95)` by default (showing 66% and 95% intervals), but this can be changed by passing a `.width` argument to `stat_pointinterval()` / `stat_pointintervalh()`.
+These functions have `.width = c(.66, .95)` by default (showing 66% and 95% intervals), but this can be changed by passing a `.width` argument to `stat_pointinterval().
 
-### Intervals with posterior violins ("eye plots"): `stat_eye()` and `stat_eyeh()`
+### Intervals with posterior violins ("eye plots"): `stat_eye()`
 
-The `stat_eye()` and `stat_eyeh()` geoms provide a shortcut to generating "eye plots" (combinations of intervals and densities, drawn as violin plots):
+The `stat_eye()` geoms provide a shortcut to generating "eye plots" (combinations of intervals and densities, drawn as violin plots):
 
 ```{r fig.width = small_width, fig.height = tiny_height}
 m %>%
   spread_draws(intercept[condition]) %>%
   ggplot(aes(y = fct_rev(condition), x = intercept)) +
-  stat_eyeh()
+  stat_eye()
 ```
 
-### Intervals with posterior densities ("half-eye plots"): `stat_halfeyeh()`
+### Intervals with posterior densities ("half-eye plots"): `stat_halfeye()`
 
-If you prefer densities over violins, you can use `stat_halfeyeh()`. This example also demonstrates how to change the interval probability (here, to 90% and 50% intervals):
+If you prefer densities over violins, you can use `stat_halfeye()`. This example also demonstrates how to change the interval probability (here, to 90% and 50% intervals):
 
 ```{r fig.width = small_width, fig.height = tiny_height}
 m %>%
   spread_draws(intercept[condition]) %>%
   ggplot(aes(y = fct_rev(condition), x = intercept)) +
-  stat_halfeyeh(.width = c(.90, .5))
+  stat_halfeye(.width = c(.90, .5))
 ```
 
-Or say you want to annotate portions of the densities in color; the `fill` aesthetic can vary within a slab in all geoms and stats in the `geom_slabinterval()` family, including `stat_halfeyeh()`. For example, if you want to annotate a domain-specific region of practical equivalence (ROPE), you could do something like this:
+Or say you want to annotate portions of the densities in color; the `fill` aesthetic can vary within a slab in all geoms and stats in the `geom_slabinterval()` family, including `stat_halfeye()`. For example, if you want to annotate a domain-specific region of practical equivalence (ROPE), you could do something like this:
 
 ```{r fig.width = small_width, fig.height = tiny_height}
 m %>%
   spread_draws(intercept[condition]) %>%
   ggplot(aes(y = fct_rev(condition), x = intercept, fill = stat(abs(x) < .8))) +
-  stat_halfeyeh() +
+  stat_halfeye() +
   geom_vline(xintercept = c(-.8, .8), linetype = "dashed") +
   scale_fill_manual(values = c("gray80", "skyblue"))
 ```
@@ -307,19 +305,19 @@ There are a variety of additional stats for visualizing distributions in the `ge
 
 <img src="slabinterval_family.png" width="700" alt="The slabinterval family of geoms and stats" />
 
-See `vignette("slabinterval", package = "tidybayes")` for an overview.
+See `vignette("slabinterval", package = "ggdist")` for an overview.
 
 ### Plotting posteriors as quantile dotplots
 
 Intervals are nice if the alpha level happens to line up with whatever decision you are trying to make, but getting a shape of the posterior is better (hence eye plots, above). On the other hand, making inferences from density plots is imprecise (estimating the area of one shape as a proportion of another is a hard perceptual task). Reasoning about probability in frequency formats is easier, motivating [quantile dotplots](https://github.com/mjskay/when-ish-is-my-bus/blob/master/quantile-dotplots.md) ([Kay et al. 2016](https://doi.org/10.1145/2858036.2858558), [Fernandes et al. 2018](https://doi.org/10.1145/3173574.3173718)), which also allow precise estimation of arbitrary intervals (down to the dot resolution of the plot, 100 in the example below). 
 
-Within the slabinterval family of geoms in tidybayes is the `dots` and `dotsinterval` family, which automatically determine appropriate bin sizes for dotplots and can calculate quantiles from samples to construct quantile dotplots. `stat_dotsh()` is the horizontal variant designed for use on samples:
+Within the slabinterval family of geoms in tidybayes is the `dots` and `dotsinterval` family, which automatically determine appropriate bin sizes for dotplots and can calculate quantiles from samples to construct quantile dotplots. `stat_dots()` is the horizontal variant designed for use on samples:
 
 ```{r fig.width = med_width, fig.height = med_height}
 m %>%
   spread_draws(intercept[condition]) %>%
   ggplot(aes(x = intercept, y = fct_rev(condition))) +
-  stat_dotsh(quantiles = 100)
+  stat_dots(quantiles = 100)
 ```
 
 The idea is to get away from thinking about the posterior as indicating one canonical point or interval, but instead to represent it as (say) 100 approximately equally likely points.
@@ -364,38 +362,38 @@ ABC %>%
 
 This approach can be less error-prone if we change the parameterization of the model later, since `rethinking` will figure out how to calculate the linear predictor for us (rather than us having to do it manually, a calculation which changes depending on the model parameterization).
 
-Then we can plot the output with `stat_pointintervalh()`:
+Then we can plot the output with `stat_pointinterval()`:
 
 ```{r fig.width = tiny_width, fig.height = tiny_height}
 ABC %>%
   data_grid(condition) %>%
   add_fitted_draws(m) %>%
   ggplot(aes(x = .value, y = fct_rev(condition))) +
-  stat_pointintervalh(.width = c(.66, .95))
+  stat_pointinterval(.width = c(.66, .95))
 ```
 
 ## Posterior predictions
 
-Where `add_fitted_draws` is analogous to `rethinking::link()`, `add_predicted_draws` is analogous to `rethinking::sim()`, giving draws from the posterior predictive distribution.
+Where `add_fitted_draws` is analogous to `rethinking::link()`, `add_predicted_draws()` is analogous to `rethinking::sim()`, giving draws from the posterior predictive distribution.
 
-Here is an example of posterior predictive distributions plotted using `stat_slabh()`:
+Here is an example of posterior predictive distributions plotted using `stat_slab()`:
 
 ```{r fig.width = small_width, fig.height = tiny_height}
 ABC %>%
   data_grid(condition) %>%
   add_predicted_draws(m) %>%
   ggplot(aes(x = .prediction, y = condition)) +
-  stat_slabh()
+  stat_slab()
 ```
 
-We could also use `tidybayes::stat_intervalh()` to plot predictive bands alongside the data:
+We could also use `ggdist::stat_interval()` to plot predictive bands alongside the data:
 
 ```{r fig.width = small_width, fig.height = tiny_height}
 ABC %>%
   data_grid(condition) %>%
   add_predicted_draws(m) %>%
   ggplot(aes(y = condition, x = .prediction)) +
-  stat_intervalh(.width = c(.50, .80, .95, .99)) +
+  stat_interval(.width = c(.50, .80, .95, .99)) +
   geom_point(aes(x = response), data = ABC) +
   scale_color_brewer()
 ```
@@ -414,8 +412,8 @@ preds = grid %>%
 
 ABC %>%
   ggplot(aes(y = condition, x = response)) +
-  stat_intervalh(aes(x = .prediction), data = preds) +
-  stat_pointintervalh(aes(x = .value), data = fits, .width = c(.66, .95), position = position_nudge(y = -0.3)) +
+  stat_interval(aes(x = .prediction), data = preds) +
+  stat_pointinterval(aes(x = .value), data = fits, .width = c(.66, .95), position = position_nudge(y = -0.3)) +
   geom_point() +
   scale_color_brewer()
 ```
@@ -424,7 +422,7 @@ ABC %>%
 
 The above approach to posterior predictions integrates over the parameter uncertainty to give a single posterior predictive distribution. Another approach, often used by John Kruschke in his book [Doing Bayesian Data Analysis](https://sites.google.com/site/doingbayesiandataanalysis/), is to attempt to show both the predictive uncertainty and the parameter uncertainty simultaneously by showing several possible predictive distributions implied by the posterior.
 
-We can do this pretty easily by asking for the distributional parameters for a given prediction implied by the posterior. These are the link-level linear predictors returned by `rethinking::link()`; in `tidybayes` we follow the terminology of the `brms` package and calls these distributional regression parameters. In our model, these are the `mu` and `sigma` parameters. We can access these explicitly by setting `dpar = c("mu", "sigma")` in `add_fitted_draws`. Rather than specifying the parameters explicitly, you can also just set `dpar = TRUE` to get draws from all distributional parameters in a model. Then, we can select a small number of draws using `tidybyaes::sample_draws()` and then use `stat_dist_slabh()` to visualize each predictive distribution implied by the values of `mu` and `sigma`:
+We can do this pretty easily by asking for the distributional parameters for a given prediction implied by the posterior. These are the link-level linear predictors returned by `rethinking::link()`; in `tidybayes` we follow the terminology of the `brms` package and calls these distributional regression parameters. In our model, these are the `mu` and `sigma` parameters. We can access these explicitly by setting `dpar = c("mu", "sigma")` in `add_fitted_draws()`. Rather than specifying the parameters explicitly, you can also just set `dpar = TRUE` to get draws from all distributional parameters in a model. Then, we can select a small number of draws using `tidybayes::sample_draws()` and then use `stat_dist_slab()` to visualize each predictive distribution implied by the values of `mu` and `sigma`:
 
 ```{r fig.width = small_width, fig.height = small_height}
 ABC %>%
@@ -432,7 +430,7 @@ ABC %>%
   add_fitted_draws(m, dpar = c("mu", "sigma")) %>%
   sample_draws(30) %>%
   ggplot(aes(y = condition)) +
-  stat_dist_slabh(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
+  stat_dist_slab(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
     slab_color = "gray65", alpha = 1/10, fill = NA
   ) +
   geom_point(aes(x = response), data = ABC, shape = 21, fill = "#9ECAE1", size = 2)
@@ -482,7 +480,7 @@ m_mpg = ulam(alist(
 )
 ```
 
-We can draw fit curves with probability bands using `add_fitted_draws()` with `tidybayes::stat_lineribbon()`:
+We can draw fit curves with probability bands using `add_fitted_draws()` with `ggdist::stat_lineribbon()`:
 
 ```{r fig.width = med_width, fig.height = small_height}
 mtcars_clean %>%
@@ -563,7 +561,7 @@ mtcars_clean %>%
 
 If we wish compare the means from each condition, `tidybayes::compare_levels()` facilitates comparisons of the value of some variable across levels of a factor. By default it computes all pairwise differences. 
 
-Let's demonstrate `tidybayes::compare_levels()` with another plotting geom, `tidybayes::stat_halfeyeh()`, which gives horizontal "half-eye" plots, combining intervals with a density plot:
+Let's demonstrate `tidybayes::compare_levels()` with another plotting geom, `ggdist::stat_halfeye()`, which gives horizontal "half-eye" plots, combining intervals with a density plot:
 
 ```{r fig.width = small_width, fig.height = small_height}
 #N.B. the syntax for compare_levels is experimental and may change
@@ -571,7 +569,7 @@ m %>%
   spread_draws(intercept[condition]) %>%
   compare_levels(intercept, by = condition) %>%
   ggplot(aes(y = condition, x = intercept)) +
-  stat_halfeyeh()
+  stat_halfeye()
 ```
 
 If you prefer "caterpillar" plots, ordered by something like the mean of the difference, you can reorder the factor before plotting:
@@ -584,7 +582,7 @@ m %>%
   ungroup() %>%
   mutate(condition = reorder(condition, intercept)) %>%
   ggplot(aes(y = condition, x = intercept)) +
-  stat_halfeyeh() +
+  stat_halfeye() +
   geom_vline(xintercept = 0, linetype = "dashed") 
 ```
 
@@ -751,7 +749,7 @@ data_plot_with_mean = fitted_cyl_probs %>%
   mutate(cyl = as.numeric(as.character(cyl))) %>%
   group_by(mpg, .draw) %>%
   # calculate expected cylinder value
-  summarise(cyl = sum(cyl * `P(cyl | mpg)`)) %>%
+  summarise(cyl = sum(cyl * `P(cyl | mpg)`), .groups = "drop_last") %>%
   ggplot(aes(x = mpg, y = cyl)) +
   geom_line(aes(group = .draw), alpha = 5/100) +
   geom_point(aes(y = as.numeric(as.character(cyl)), fill = cyl), data = mtcars_clean, shape = 21, size = 2) +

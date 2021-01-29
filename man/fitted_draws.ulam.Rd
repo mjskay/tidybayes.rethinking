@@ -104,6 +104,6 @@ just the first linear submodel returned by \code{rethinking::link()} is used.}
 }
 \description{
 Adds draws from the posterior link-level predictor of a rethinking model to a data frame.
-Provides support for \code{\link[tidybayes:fitted_draws]{tidybayes::fitted_draws()}} / \code{\link[tidybayes:add_fitted_draws]{tidybayes::add_fitted_draws()}} /
-\code{\link[tidybayes:add_linpred_draws]{tidybayes::add_linpred_draws()}} for models from the \code{rethinking} package.
+Provides support for \code{\link[tidybayes:add_predicted_draws]{tidybayes::fitted_draws()}} / \code{\link[tidybayes:add_predicted_draws]{tidybayes::add_fitted_draws()}} /
+\code{\link[tidybayes:add_predicted_draws]{tidybayes::add_linpred_draws()}} for models from the \code{rethinking} package.
 }
