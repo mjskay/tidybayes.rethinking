@@ -6,4 +6,3 @@
 .Rproj*
 *.Rproj
 vignettes/*_cache/
-.DS_Store
