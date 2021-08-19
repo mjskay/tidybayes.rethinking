@@ -351,12 +351,14 @@ m %>%
 
 ## Posterior fits
 
-Rather than calculating conditional means manually from model parameters, we could use `add_fitted_draws`, which is analogous to `rethinking::link` (giving posterior draws from the model's linear predictor), but uses a tidy data format. We can combine it with `modelr::data_grid` to first generate a grid describing the fits we want, then transform that grid into a long-format data frame of draws from posterior fits:
+Rather than calculating conditional means manually from model parameters, we could use `add_linpred_draws()`, which is analogous to `rethinking::link()` (giving posterior draws from the model's linear predictor), but uses a tidy data format. It's important to remember that `rethinking` provides values from the inverse-link-transformed linear predictor, not the raw linear predictor, and also not the expectation of the posterior predictive (as with `epred_draws()`, which is currently **not supported**). Thus, you can take this value as the mean of the posterior predictive **only in models with that property** (e.g. Gaussian models).
+
+We can use `modelr::data_grid()` to first generate a grid describing the fits we want, then transform that grid into a long-format data frame of draws from posterior fits:
 
 ```{r}
 ABC %>%
   data_grid(condition) %>%
-  add_fitted_draws(m) %>%
+  add_linpred_draws(m) %>%
   head(10)
 ```
 
@@ -367,14 +369,14 @@ Then we can plot the output with `stat_pointinterval()`:
 ```{r fig.width = tiny_width, fig.height = tiny_height}
 ABC %>%
   data_grid(condition) %>%
-  add_fitted_draws(m) %>%
-  ggplot(aes(x = .value, y = fct_rev(condition))) +
+  add_linpred_draws(m) %>%
+  ggplot(aes(x = .linpred, y = fct_rev(condition))) +
   stat_pointinterval(.width = c(.66, .95))
 ```
 
 ## Posterior predictions
 
-Where `add_fitted_draws` is analogous to `rethinking::link()`, `add_predicted_draws()` is analogous to `rethinking::sim()`, giving draws from the posterior predictive distribution.
+Where `add_linpred_draws` is analogous to `rethinking::link()`, `add_predicted_draws()` is analogous to `rethinking::sim()`, giving draws from the posterior predictive distribution.
 
 Here is an example of posterior predictive distributions plotted using `stat_slab()`:
 
@@ -405,7 +407,7 @@ grid = ABC %>%
   data_grid(condition)
 
 fits = grid %>%
-  add_fitted_draws(m)
+  add_linpred_draws(m)
 
 preds = grid %>%
   add_predicted_draws(m)
@@ -413,7 +415,7 @@ preds = grid %>%
 ABC %>%
   ggplot(aes(y = condition, x = response)) +
   stat_interval(aes(x = .prediction), data = preds) +
-  stat_pointinterval(aes(x = .value), data = fits, .width = c(.66, .95), position = position_nudge(y = -0.3)) +
+  stat_pointinterval(aes(x = .linpred), data = fits, .width = c(.66, .95), position = position_nudge(y = -0.3)) +
   geom_point() +
   scale_color_brewer()
 ```
@@ -422,12 +424,12 @@ ABC %>%
 
 The above approach to posterior predictions integrates over the parameter uncertainty to give a single posterior predictive distribution. Another approach, often used by John Kruschke in his book [Doing Bayesian Data Analysis](https://sites.google.com/site/doingbayesiandataanalysis/), is to attempt to show both the predictive uncertainty and the parameter uncertainty simultaneously by showing several possible predictive distributions implied by the posterior.
 
-We can do this pretty easily by asking for the distributional parameters for a given prediction implied by the posterior. These are the link-level linear predictors returned by `rethinking::link()`; in `tidybayes` we follow the terminology of the `brms` package and calls these distributional regression parameters. In our model, these are the `mu` and `sigma` parameters. We can access these explicitly by setting `dpar = c("mu", "sigma")` in `add_fitted_draws()`. Rather than specifying the parameters explicitly, you can also just set `dpar = TRUE` to get draws from all distributional parameters in a model. Then, we can select a small number of draws using `tidybayes::sample_draws()` and then use `stat_dist_slab()` to visualize each predictive distribution implied by the values of `mu` and `sigma`:
+We can do this pretty easily by asking for the distributional parameters for a given prediction implied by the posterior. These are the link-level linear predictors returned by `rethinking::link()`; in `tidybayes` we follow the terminology of the `brms` package and calls these distributional regression parameters. In our model, these are the `mu` and `sigma` parameters. We can access these explicitly by setting `dpar = c("mu", "sigma")` in `add_linpred_draws()`. Rather than specifying the parameters explicitly, you can also just set `dpar = TRUE` to get draws from all distributional parameters in a model. Then, we can select a small number of draws using `tidybayes::sample_draws()` and then use `stat_dist_slab()` to visualize each predictive distribution implied by the values of `mu` and `sigma`:
 
 ```{r fig.width = small_width, fig.height = small_height}
 ABC %>%
   data_grid(condition) %>%
-  add_fitted_draws(m, dpar = c("mu", "sigma")) %>%
+  add_linpred_draws(m, dpar = c("mu", "sigma")) %>%
   sample_draws(30) %>%
   ggplot(aes(y = condition)) +
   stat_dist_slab(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
@@ -443,12 +445,12 @@ We could even combine the Kruschke-style plots of predictive distributions with 
 ```{r fig.width = small_width, fig.height = small_height}
 ABC %>%
   data_grid(condition) %>%
-  add_fitted_draws(m, dpar = c("mu", "sigma")) %>%
+  add_linpred_draws(m, dpar = c("mu", "sigma")) %>%
   ggplot(aes(x = condition)) +
   stat_dist_slab(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
     slab_color = "gray65", alpha = 1/10, fill = NA, data = . %>% sample_draws(30), scale = .5
   ) +
-  stat_halfeye(aes(y = .value), side = "bottom", scale = .5) +
+  stat_halfeye(aes(y = .linpred), side = "bottom", scale = .5) +
   geom_point(aes(y = response), data = ABC, shape = 21, fill = "#9ECAE1", size = 2, position = position_nudge(x = -.2))
 ```
 
@@ -480,15 +482,15 @@ m_mpg = ulam(alist(
 )
 ```
 
-We can draw fit curves with probability bands using `add_fitted_draws()` with `ggdist::stat_lineribbon()`:
+We can draw fit curves with probability bands using `add_linpred_draws()` with `ggdist::stat_lineribbon()`:
 
 ```{r fig.width = med_width, fig.height = small_height}
 mtcars_clean %>%
   group_by(cyl) %>%
   data_grid(hp = seq_range(hp, n = 51)) %>%
-  add_fitted_draws(m_mpg) %>%
+  add_linpred_draws(m_mpg) %>%
   ggplot(aes(x = hp, y = mpg, color = cyl)) +
-  stat_lineribbon(aes(y = .value)) +
+  stat_lineribbon(aes(y = .linpred)) +
   geom_point(data = mtcars_clean) +
   scale_fill_brewer(palette = "Greys") +
   scale_color_brewer(palette = "Set2")
@@ -500,9 +502,9 @@ Or we can sample a reasonable number of fit lines (say 100) and overplot them:
 mtcars_clean %>%
   group_by(cyl) %>%
   data_grid(hp = seq_range(hp, n = 101)) %>%
-  add_fitted_draws(m_mpg, n = 100) %>%
+  add_linpred_draws(m_mpg, ndraws = 100) %>%
   ggplot(aes(x = hp, y = mpg, color = cyl)) +
-  geom_line(aes(y = .value, group = paste(cyl, .draw)), alpha = .1) +
+  geom_line(aes(y = .linpred, group = paste(cyl, .draw)), alpha = .1) +
   geom_point(data = mtcars_clean) +
   scale_color_brewer(palette = "Dark2")
 ```
@@ -518,9 +520,9 @@ ndraws = 20
 p = mtcars_clean %>%
   group_by(cyl) %>%
   data_grid(hp = seq_range(hp, n = 101)) %>%
-  add_fitted_draws(m_mpg, n = ndraws) %>%
+  add_linpred_draws(m_mpg, ndraws = ndraws) %>%
   ggplot(aes(x = hp, y = mpg, color = cyl)) +
-  geom_line(aes(y = .value, group = paste(cyl, .draw))) +
+  geom_line(aes(y = .linpred, group = paste(cyl, .draw))) +
   geom_point(data = mtcars_clean) +
   scale_color_brewer(palette = "Dark2") +
   transition_states(.draw, 0, 1) +
@@ -613,8 +615,8 @@ Here is a plot of the link-level fit:
 ```{r fig.width = small_width, fig.height = tiny_height}
 mtcars_clean %>%
   data_grid(mpg = seq_range(mpg, n = 101)) %>%
-  add_fitted_draws(m_cyl) %>%
-  ggplot(aes(x = mpg, y = .value)) +
+  add_linpred_draws(m_cyl) %>%
+  ggplot(aes(x = mpg, y = .linpred)) +
   stat_lineribbon(color = "red") +
   scale_fill_brewer(palette = "Greys")
 ```
@@ -674,11 +676,11 @@ Given the data frame of cutpoints and the latent linear predictor, we can more-o
 ```{r}
 fitted_cyl_probs = mtcars_clean %>%
   data_grid(mpg = seq_range(mpg, n = 101)) %>%
-  add_fitted_draws(m_cyl) %>%
+  add_linpred_draws(m_cyl) %>%
   inner_join(cutpoints, by = ".draw") %>%
   mutate(`P(cyl | mpg)` = 
     # this part is logit^-1(cutpoint_j - beta*x) - logit^-1(cutpoint_{j-1} - beta*x)
-    plogis(cutpoint - .value) - plogis(prev_cutpoint - .value)
+    plogis(cutpoint - .linpred) - plogis(prev_cutpoint - .linpred)
   )
 
 fitted_cyl_probs %>%
@@ -794,7 +796,7 @@ This doesn't look too bad --- tails might be a bit long. Let's check using anoth
 ```{r fig.width = med_width, fig.height = med_height}
 mtcars_clean %>%
   select(mpg) %>%
-  add_predicted_draws(m_cyl, n = 100, seed = 12345) %>%
+  add_predicted_draws(m_cyl, ndraws = 100, seed = 12345) %>%
   # recover original factor labels
   mutate(cyl = levels(mtcars_clean$cyl)[.prediction]) %>%
   ggplot(aes(x = cyl)) +

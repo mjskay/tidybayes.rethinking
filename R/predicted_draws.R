@@ -14,7 +14,7 @@
 tidy_sim = function(data, fit, ...) {
   .Deprecated("add_predicted_draws", "tidybayes.rethinking")
 
-  fitted_draws(model = fit, newdata = data, ...)
+  fitted_draws(object = fit, newdata = data, ...)
 }
 
 
@@ -27,18 +27,18 @@ tidy_sim = function(data, fit, ...) {
 #' models from the `rethinking` package.
 #'
 #' @inheritParams tidybayes::predicted_draws
-#' @param model A model fit using `rethinking::quap()`, `rethinking::ulam()`,
+#' @param object A model fit using `rethinking::quap()`, `rethinking::ulam()`,
 #' `rethinking::map()`, or `rethinking::map2stan()`.
 #' @param ... Optional parameters passed on to `rethinking::sim()`. The most pertinent are:
-#'   - `post`: Optional samples from posterior. If missing, simulates samples using `n`.
-#' @param n The number of draws per prediction to return. When `NULL` (the default), `rethinking::ulam()` and
+#'   - `post`: Optional samples from posterior. If missing, simulates samples using `ndraws`.
+#' @param ndraws The number of draws per prediction to return. When `NULL` (the default), `rethinking::ulam()` and
 #' `rethinking::map2stan()` models return all draws; `rethinking::quap()` and `rethinking::map()` models
 #' return 5000 draws.
 #' @param re_formula,category Not used with this model type.
 #' @importFrom rlang is_true is_false is_empty
 #' @importFrom tidybayes predicted_draws add_draws sample_draws
 #' @export
-predicted_draws.ulam = function(model, newdata, prediction = ".prediction", ..., n = NULL, seed = NULL,
+predicted_draws.ulam = function(object, newdata, value = ".prediction", ..., ndraws = NULL, seed = NULL,
   re_formula = NULL, category = ".category"
 ) {
   if (!is.null(re_formula)) {
@@ -49,18 +49,18 @@ predicted_draws.ulam = function(model, newdata, prediction = ".prediction", ...,
   }
 
   # map and quap models need to specify the number of draws (since they are generated)
-  if ((inherits(model, "map") || inherits(model, "quap")) && is.null(n)) {
-    n = 5000
+  if ((inherits(object, "map") || inherits(object, "quap")) && is.null(ndraws)) {
+    ndraws = 5000
   }
 
   # get the draws from the posterior predictive
   set.seed(seed)
-  sims = rethinking::sim(model, newdata, n = n, ...)
-  draws = add_draws(newdata, sims, value = prediction)
+  sims = rethinking::sim(object, newdata, n = ndraws, ...)
+  draws = add_draws(newdata, sims, value = value)
 
   # ulam and map2stan models seem to ignore n
-  if ((inherits(model, "map2stan") || inherits(model, "ulam")) && !is.null(n)) {
-    draws = sample_draws(draws, n)
+  if ((inherits(object, "map2stan") || inherits(object, "ulam")) && !is.null(ndraws)) {
+    draws = sample_draws(draws, ndraws)
   }
 
   draws

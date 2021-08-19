@@ -1,10 +1,10 @@
 Package: tidybayes.rethinking
 Title: Tidy Data for Rethinking
-Version: 2.0.3.9000
+Version: 3.0.0
 Date: 2020-06-01
 Authors@R: c(person("Matthew", "Kay", role = c("aut", "cre"),
-    email = "mjskay@umich.edu"))
-Maintainer: Matthew Kay <mjskay@umich.edu>
+    email = "mjskay@northwestern.edu"))
+Maintainer: Matthew Kay <mjskay@northwestern.edu>
 Description: Extends tidybayes to support composing data for and gathering draws from
     models fit using Richard McElreath's rethinking package in a tidy data format.
 Depends:
@@ -14,7 +14,7 @@ Imports:
     tibble,
     rlang,
     MASS,
-    tidybayes (>= 2.0.3),
+    tidybayes (>= 3.0.0),
     rethinking,
     rstan
 Suggests:
@@ -22,10 +22,10 @@ Suggests:
     magrittr,
     tidyr,
     knitr,
-    testthat
+    testthat,
+    rmarkdown
 Remotes: 
-    rmcelreath/rethinking,
-    mjskay/tidybayes
+    rmcelreath/rethinking
 License: GPL (>= 3)
 BugReports: https://github.com/mjskay/tidybayes.rethinking/issues/new
 URL: http://mjskay.github.io/tidybayes.rethinking, https://github.com/mjskay/tidybayes.rethinking

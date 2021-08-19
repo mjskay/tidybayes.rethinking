@@ -6,7 +6,7 @@ output: github_document
 
 [![R build status](https://github.com/mjskay/tidybayes.rethinking/workflows/R-CMD-check/badge.svg)](https://github.com/mjskay/tidybayes.rethinking/actions)
 
-_Matthew Kay, University of Michigan, <mjskay@umich.edu>_
+_Matthew Kay, Northwestern University, <mjskay@northwestern.edu>_
 
 This package extends the [tidybayes](https://mjskay.github.io/tidybayes/) R package to support models from Richard McElreath's [rethinking](https://github.com/rmcelreath/rethinking) package. 
 

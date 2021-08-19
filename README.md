@@ -4,7 +4,7 @@
 [![R build
 status](https://github.com/mjskay/tidybayes.rethinking/workflows/R-CMD-check/badge.svg)](https://github.com/mjskay/tidybayes.rethinking/actions)
 
-*Matthew Kay, University of Michigan, <mjskay@umich.edu>*
+*Matthew Kay, Northwestern University, <mjskay@northwestern.edu>*
 
 This package extends the
 [tidybayes](https://mjskay.github.io/tidybayes/) R package to support
@@ -34,7 +34,7 @@ general examples of `tidybayes` usage.
 
 ## Feedback and issues
 
-I welcome feedback, suggestions, and issues\! If you have found a bug in
+I welcome feedback, suggestions, and issues! If you have found a bug in
 the rethinking-specific version of functions, please file it on [the
 tidybayes.rethinking
 github](https://github.com/mjskay/tidybayes.rethinking/issues/new) with
@@ -46,7 +46,6 @@ redirect the issue if necessary.
 
 ## Citing `tidybayes`
 
-Matthew Kay (2020). *tidybayes: Tidy Data and Geoms for Bayesian
-Models*. R package version 2.0.3.9000,
-<https://mjskay.github.io/tidybayes/>. DOI:
-[10.5281/zenodo.1308151](https://doi.org/10.5281/zenodo.1308151).
+Matthew Kay (2021). *tidybayes: Tidy Data and Geoms for Bayesian
+Models*. R package version 3.0.0, <https://mjskay.github.io/tidybayes/>.
+DOI: [10.5281/zenodo.1308151](https://doi.org/10.5281/zenodo.1308151).

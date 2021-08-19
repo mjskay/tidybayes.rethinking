@@ -14,9 +14,9 @@
 #' analogs for `tidy_link()` or `tidy_sim()`. However, `tidybayes` now has a mature API
 #' analogous to these functions, so they have been deprecated:
 #'
-#' - `tidy_link()` has been replaced with `add_fitted_draws()` / `fitted_draws()`. See
-#'   `fitted_draws.ulam()` for information on rethinking-specific arguments, or
-#'   `tidybayes::fitted_draws()` for information on the general function.
+#' - `tidy_link()` has been replaced with `add_linpred_draws()` / `linpred_draws()`. See
+#'   `linpred_draws.ulam()` for information on rethinking-specific arguments, or
+#'   `tidybayes::linpred_draws()` for information on the general function.
 #'
 #' - `tidy_sim()` has been replaced with `add_predicted_draws()` / `predicted_draws()`. See
 #'   `predicted_draws.ulam()` for information on rethinking-specific arguments, or

@@ -8,68 +8,73 @@
 \title{Add draws from the posterior predictive of a rethinking model to a data frame}
 \usage{
 \method{predicted_draws}{ulam}(
-  model,
+  object,
   newdata,
-  prediction = ".prediction",
+  value = ".prediction",
   ...,
-  n = NULL,
+  ndraws = NULL,
   seed = NULL,
   re_formula = NULL,
   category = ".category"
 )
 
 \method{predicted_draws}{quap}(
-  model,
+  object,
   newdata,
-  prediction = ".prediction",
+  value = ".prediction",
   ...,
-  n = NULL,
+  ndraws = NULL,
   seed = NULL,
   re_formula = NULL,
   category = ".category"
 )
 
 \method{predicted_draws}{map}(
-  model,
+  object,
   newdata,
-  prediction = ".prediction",
+  value = ".prediction",
   ...,
-  n = NULL,
+  ndraws = NULL,
   seed = NULL,
   re_formula = NULL,
   category = ".category"
 )
 
 \method{predicted_draws}{map2stan}(
-  model,
+  object,
   newdata,
-  prediction = ".prediction",
+  value = ".prediction",
   ...,
-  n = NULL,
+  ndraws = NULL,
   seed = NULL,
   re_formula = NULL,
   category = ".category"
 )
 }
 \arguments{
-\item{model}{A model fit using \code{rethinking::quap()}, \code{rethinking::ulam()},
+\item{object}{A model fit using \code{rethinking::quap()}, \code{rethinking::ulam()},
 \code{rethinking::map()}, or \code{rethinking::map2stan()}.}
 
-\item{newdata}{Data frame to generate predictions from. If omitted, most model types will
-generate predictions from the data used to fit the model.}
+\item{newdata}{Data frame to generate predictions from.}
 
-\item{prediction}{The name of the output column for \code{predicted_draws}; default \code{".prediction"}.}
+\item{value}{The name of the output column:
+\itemize{
+\item for \verb{[add_]epred_draws()}, defaults to \code{".epred"}.
+\item for \verb{[add_]predicted_draws()}, defaults to \code{".prediction"}.
+\item for \verb{[add_]linpred_draws()}, defaults to \code{".linpred"}.
+\item for \verb{[add_]residual_draws()}, defaults to \code{".residual"}
+}}
 
 \item{...}{Optional parameters passed on to \code{rethinking::sim()}. The most pertinent are:
 \itemize{
-\item \code{post}: Optional samples from posterior. If missing, simulates samples using \code{n}.
+\item \code{post}: Optional samples from posterior. If missing, simulates samples using \code{ndraws}.
 }}
 
-\item{n}{The number of draws per prediction to return. When \code{NULL} (the default), \code{rethinking::ulam()} and
+\item{ndraws}{The number of draws per prediction to return. When \code{NULL} (the default), \code{rethinking::ulam()} and
 \code{rethinking::map2stan()} models return all draws; \code{rethinking::quap()} and \code{rethinking::map()} models
 return 5000 draws.}
 
-\item{seed}{A seed to use when subsampling draws (i.e. when \code{n} is not \code{NULL}).}
+\item{seed}{A seed to use when subsampling draws (i.e. when \code{ndraws} is not \code{NULL}).}
 
 \item{re_formula, category}{Not used with this model type.}
 }

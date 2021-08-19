@@ -6,3 +6,4 @@
 .Rproj*
 *.Rproj
 vignettes/*_cache/
+.Rproj.user
