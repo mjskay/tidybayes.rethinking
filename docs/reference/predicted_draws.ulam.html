@@ -94,7 +94,7 @@ models from the rethinking package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidybayes.rethinking</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -155,11 +155,11 @@ models from the <code>rethinking</code> package.</p>
 
     <pre class="usage"><span class='co'># S3 method for ulam</span>
 <span class='fu'>predicted_draws</span><span class='op'>(</span>
-  <span class='va'>model</span>,
+  <span class='va'>object</span>,
   <span class='va'>newdata</span>,
-  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  value <span class='op'>=</span> <span class='st'>".prediction"</span>,
   <span class='va'>...</span>,
-  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ndraws <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
   category <span class='op'>=</span> <span class='st'>".category"</span>
@@ -167,11 +167,11 @@ models from the <code>rethinking</code> package.</p>
 
 <span class='co'># S3 method for quap</span>
 <span class='fu'>predicted_draws</span><span class='op'>(</span>
-  <span class='va'>model</span>,
+  <span class='va'>object</span>,
   <span class='va'>newdata</span>,
-  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  value <span class='op'>=</span> <span class='st'>".prediction"</span>,
   <span class='va'>...</span>,
-  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ndraws <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
   category <span class='op'>=</span> <span class='st'>".category"</span>
@@ -179,11 +179,11 @@ models from the <code>rethinking</code> package.</p>
 
 <span class='co'># S3 method for map</span>
 <span class='fu'>predicted_draws</span><span class='op'>(</span>
-  <span class='va'>model</span>,
+  <span class='va'>object</span>,
   <span class='va'>newdata</span>,
-  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  value <span class='op'>=</span> <span class='st'>".prediction"</span>,
   <span class='va'>...</span>,
-  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ndraws <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
   category <span class='op'>=</span> <span class='st'>".category"</span>
@@ -191,11 +191,11 @@ models from the <code>rethinking</code> package.</p>
 
 <span class='co'># S3 method for map2stan</span>
 <span class='fu'>predicted_draws</span><span class='op'>(</span>
-  <span class='va'>model</span>,
+  <span class='va'>object</span>,
   <span class='va'>newdata</span>,
-  prediction <span class='op'>=</span> <span class='st'>".prediction"</span>,
+  value <span class='op'>=</span> <span class='st'>".prediction"</span>,
   <span class='va'>...</span>,
-  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ndraws <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   re_formula <span class='op'>=</span> <span class='cn'>NULL</span>,
   category <span class='op'>=</span> <span class='st'>".category"</span>
@@ -205,34 +205,38 @@ models from the <code>rethinking</code> package.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
+      <th>object</th>
       <td><p>A model fit using <code><a href='https://rdrr.io/pkg/rethinking/man/quap.html'>rethinking::quap()</a></code>, <code><a href='https://rdrr.io/pkg/rethinking/man/ulam.html'>rethinking::ulam()</a></code>,
 <code><a href='https://rdrr.io/pkg/rethinking/man/quap.html'>rethinking::map()</a></code>, or <code><a href='https://rdrr.io/pkg/rethinking/man/map2stan.html'>rethinking::map2stan()</a></code>.</p></td>
     </tr>
     <tr>
       <th>newdata</th>
-      <td><p>Data frame to generate predictions from. If omitted, most model types will
-generate predictions from the data used to fit the model.</p></td>
+      <td><p>Data frame to generate predictions from.</p></td>
     </tr>
     <tr>
-      <th>prediction</th>
-      <td><p>The name of the output column for <code>predicted_draws</code>; default <code>".prediction"</code>.</p></td>
+      <th>value</th>
+      <td><p>The name of the output column:</p><ul>
+<li><p>for <code>[add_]epred_draws()</code>, defaults to <code>".epred"</code>.</p></li>
+<li><p>for <code>[add_]predicted_draws()</code>, defaults to <code>".prediction"</code>.</p></li>
+<li><p>for <code>[add_]linpred_draws()</code>, defaults to <code>".linpred"</code>.</p></li>
+<li><p>for <code>[add_]residual_draws()</code>, defaults to <code>".residual"</code></p></li>
+</ul></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Optional parameters passed on to <code><a href='https://rdrr.io/pkg/rethinking/man/sim.html'>rethinking::sim()</a></code>. The most pertinent are:</p><ul>
-<li><p><code>post</code>: Optional samples from posterior. If missing, simulates samples using <code>n</code>.</p></li>
+<li><p><code>post</code>: Optional samples from posterior. If missing, simulates samples using <code>ndraws</code>.</p></li>
 </ul></td>
     </tr>
     <tr>
-      <th>n</th>
+      <th>ndraws</th>
       <td><p>The number of draws per prediction to return. When <code>NULL</code> (the default), <code><a href='https://rdrr.io/pkg/rethinking/man/ulam.html'>rethinking::ulam()</a></code> and
 <code><a href='https://rdrr.io/pkg/rethinking/man/map2stan.html'>rethinking::map2stan()</a></code> models return all draws; <code><a href='https://rdrr.io/pkg/rethinking/man/quap.html'>rethinking::quap()</a></code> and <code><a href='https://rdrr.io/pkg/rethinking/man/quap.html'>rethinking::map()</a></code> models
 return 5000 draws.</p></td>
     </tr>
     <tr>
       <th>seed</th>
-      <td><p>A seed to use when subsampling draws (i.e. when <code>n</code> is not <code>NULL</code>).</p></td>
+      <td><p>A seed to use when subsampling draws (i.e. when <code>ndraws</code> is not <code>NULL</code>).</p></td>
     </tr>
     <tr>
       <th>re_formula, category</th>

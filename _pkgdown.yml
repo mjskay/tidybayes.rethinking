@@ -21,7 +21,7 @@ reference:
 - title: Extracting fits and predictions
   desc:  Get tidy draws from transformed linear predictors ("fits") or posterior predictions
   contents:
-  - fitted_draws.ulam
+  - linpred_draws.ulam
   - predicted_draws.ulam
 
 - title: Deprecated functions
