@@ -89,20 +89,21 @@ linpred_draws.ulam = function(object, newdata, value = ".value", ..., post = NUL
     if (is.null(post)) {
       post = extract.samples(object, n = ndraws)
     }
-  }
-  else {
-    if (is.null(post)) {
-      # have to do this manually because rethinking::link uses permuted samples (!!)
-      # and can't use unpermuted samples because when permuted = FALSE the
-      # format of the returned samples changes (!!!!)
-      # see the statement guarded by unpermute_samples below
-      unpermute_samples = TRUE
-      post = rethinking::extract.samples(object, permuted = TRUE)
-    }
+  } else if (hasName(attributes(object), "stanfit") && is.null(post)) {
+    # have to do this manually because rethinking::link with rstan under the hood
+    # uses permuted samples (!!) and can't use unpermuted samples because when
+    # permuted = FALSE the format of the returned samples changes (!!!!)
+    # see the statement guarded by unpermute_samples below
+    unpermute_samples = TRUE
+    post = rethinking::extract.samples(object, permuted = TRUE)
   }
 
   # get the draws from the link-level predictors
-  draws_list = rethinking::link(object, newdata, n = ndraws, post = post, flatten = FALSE, ...)
+  draws_list = if (is.null(post)) {
+    rethinking::link(object, newdata, n = ndraws, flatten = FALSE, ...)
+  } else {
+    rethinking::link(object, newdata, n = ndraws, post = post, flatten = FALSE, ...)
+  }
   draws = add_draws(newdata, draws_list[[1]], value = value)
 
   # get the names of distributional regression parameters to include

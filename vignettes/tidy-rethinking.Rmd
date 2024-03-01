@@ -73,7 +73,6 @@ theme_set(theme_tidybayes() + panel_border())
 These options help Stan run faster:
 
 ```{r, eval=FALSE}
-rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 ```
 
@@ -293,7 +292,7 @@ Or say you want to annotate portions of the densities in color; the `fill` aesth
 ```{r fig.width = small_width, fig.height = tiny_height}
 m %>%
   spread_draws(intercept[condition]) %>%
-  ggplot(aes(y = fct_rev(condition), x = intercept, fill = stat(abs(x) < .8))) +
+  ggplot(aes(y = fct_rev(condition), x = intercept, fill = after_stat(abs(x) < .8))) +
   stat_halfeye() +
   geom_vline(xintercept = c(-.8, .8), linetype = "dashed") +
   scale_fill_manual(values = c("gray80", "skyblue"))
@@ -424,7 +423,7 @@ ABC %>%
 
 The above approach to posterior predictions integrates over the parameter uncertainty to give a single posterior predictive distribution. Another approach, often used by John Kruschke in his book [Doing Bayesian Data Analysis](https://sites.google.com/site/doingbayesiandataanalysis/), is to attempt to show both the predictive uncertainty and the parameter uncertainty simultaneously by showing several possible predictive distributions implied by the posterior.
 
-We can do this pretty easily by asking for the distributional parameters for a given prediction implied by the posterior. These are the link-level linear predictors returned by `rethinking::link()`; in `tidybayes` we follow the terminology of the `brms` package and calls these distributional regression parameters. In our model, these are the `mu` and `sigma` parameters. We can access these explicitly by setting `dpar = c("mu", "sigma")` in `add_linpred_draws()`. Rather than specifying the parameters explicitly, you can also just set `dpar = TRUE` to get draws from all distributional parameters in a model. Then, we can select a small number of draws using `tidybayes::sample_draws()` and then use `stat_dist_slab()` to visualize each predictive distribution implied by the values of `mu` and `sigma`:
+We can do this pretty easily by asking for the distributional parameters for a given prediction implied by the posterior. These are the link-level linear predictors returned by `rethinking::link()`; in `tidybayes` we follow the terminology of the `brms` package and calls these distributional regression parameters. In our model, these are the `mu` and `sigma` parameters. We can access these explicitly by setting `dpar = c("mu", "sigma")` in `add_linpred_draws()`. Rather than specifying the parameters explicitly, you can also just set `dpar = TRUE` to get draws from all distributional parameters in a model. Then, we can select a small number of draws using `tidybayes::sample_draws()` and then use `stat_slab()` to visualize each predictive distribution implied by the values of `mu` and `sigma`:
 
 ```{r fig.width = small_width, fig.height = small_height}
 ABC %>%
@@ -432,7 +431,7 @@ ABC %>%
   add_linpred_draws(m, dpar = c("mu", "sigma")) %>%
   sample_draws(30) %>%
   ggplot(aes(y = condition)) +
-  stat_dist_slab(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
+  stat_slab(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
     slab_color = "gray65", alpha = 1/10, fill = NA
   ) +
   geom_point(aes(x = response), data = ABC, shape = 21, fill = "#9ECAE1", size = 2)
@@ -447,7 +446,7 @@ ABC %>%
   data_grid(condition) %>%
   add_linpred_draws(m, dpar = c("mu", "sigma")) %>%
   ggplot(aes(x = condition)) +
-  stat_dist_slab(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
+  stat_slab(aes(dist = "norm", arg1 = mu, arg2 = sigma), 
     slab_color = "gray65", alpha = 1/10, fill = NA, data = . %>% sample_draws(30), scale = .5
   ) +
   stat_halfeye(aes(y = .linpred), side = "bottom", scale = .5) +
@@ -774,7 +773,7 @@ mtcars_clean %>%
   select(mpg) %>%
   add_predicted_draws(m_cyl, seed = 1234) %>%
   # recover original factor labels
-  mutate(cyl = levels(mtcars_clean$cyl)[.prediction]) %>%
+  mutate(cyl = factor(levels(mtcars_clean$cyl)[.prediction], levels(mtcars_clean$cyl))) %>%
   ggplot(aes(x = mpg, y = cyl)) +
   geom_count(color = "gray75") +
   geom_point(aes(fill = cyl), data = mtcars_clean, shape = 21, size = 2) +
@@ -798,7 +797,7 @@ mtcars_clean %>%
   select(mpg) %>%
   add_predicted_draws(m_cyl, ndraws = 100, seed = 12345) %>%
   # recover original factor labels
-  mutate(cyl = levels(mtcars_clean$cyl)[.prediction]) %>%
+  mutate(cyl = factor(levels(mtcars_clean$cyl)[.prediction], levels(mtcars_clean$cyl))) %>%
   ggplot(aes(x = cyl)) +
   stat_count(aes(group = NA), geom = "line", data = mtcars_clean, color = "red", size = 3, alpha = .5) +
   stat_count(aes(group = .draw), geom = "line", position = "identity", alpha = .05) +
@@ -823,7 +822,7 @@ mtcars_clean %>%
   # because brms no longer returns labelled predictions (hopefully that
   # is fixed then this will no longer be necessary)
   ungroup() %>%
-  mutate(cyl = factor(levels(mtcars_clean$cyl)[.prediction])) %>%
+  mutate(cyl = factor(levels(mtcars_clean$cyl)[.prediction], levels(mtcars_clean$cyl))) %>%
   # need .drop = FALSE to ensure 0 counts are not dropped
   group_by(.draw, .drop = FALSE) %>%
   count(cyl) %>%

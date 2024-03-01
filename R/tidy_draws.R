@@ -79,7 +79,8 @@ tidy_draws.quap = tidy_draws.map
 #' @rdname tidy_draws.map
 #' @export
 tidy_draws.map2stan = function(model, ...) {
-  draws = tidy_draws(model@stanfit, ...)
+  stan_model = attr(model, "stanfit") %||% attr(model, "cstanfit")
+  draws = tidy_draws(stan_model, ...)
 
   attr(draws, "tidybayes_constructors") = attr(model, "tidybayes_constructors")
   draws
