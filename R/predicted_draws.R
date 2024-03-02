@@ -56,11 +56,22 @@ predicted_draws.ulam = function(object, newdata, value = ".prediction", ..., ndr
   # get the draws from the posterior predictive
   set.seed(seed)
   sims = rethinking::sim(object, newdata, n = ndraws, ...)
-  draws = add_draws(newdata, sims, value = value)
-
-  # ulam and map2stan models seem to ignore n
-  if ((inherits(object, "map2stan") || inherits(object, "ulam")) && !is.null(ndraws)) {
-    draws = sample_draws(draws, ndraws)
+  if (is.array(sims)) {
+    draws = add_draws(newdata, sims, value = value)
+    # ulam and map2stan models seem to ignore n
+    if ((inherits(object, "map2stan") || inherits(object, "ulam")) && !is.null(ndraws)) {
+      draws = sample_draws(draws, ndraws)
+    }
+  } else if (is.list(sims)) {
+    f <-  function(sims, newdata, value) {
+      add_draws(newdata, sims, value = value)
+    }
+    draws <- lapply(sims, f, newdata = newdata, value = value)
+    if ((inherits(object, "map2stan") || inherits(object, "ulam")) && !is.null(ndraws)) {
+      draws <- lapply(draws, sample_draws, ndraws = ndraws)
+    }
+  } else {
+    stop("Sims has unknown type: (", paste(class(sims), collapse = ","), ")")
   }
 
   draws
