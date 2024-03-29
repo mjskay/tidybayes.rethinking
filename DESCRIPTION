@@ -30,7 +30,7 @@ License: GPL (>= 3)
 BugReports: https://github.com/mjskay/tidybayes.rethinking/issues/new
 URL: http://mjskay.github.io/tidybayes.rethinking, https://github.com/mjskay/tidybayes.rethinking
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1
 LazyData: true
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

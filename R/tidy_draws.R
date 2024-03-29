@@ -77,6 +77,7 @@ tidy_draws.map = function(model, n = 5000, ...) {
 tidy_draws.quap = tidy_draws.map
 
 #' @rdname tidy_draws.map
+#' @importFrom rlang %||%
 #' @export
 tidy_draws.map2stan = function(model, ...) {
   stan_model = attr(model, "stanfit") %||% attr(model, "cstanfit")
